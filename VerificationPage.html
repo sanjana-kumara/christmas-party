@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Verified</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #004d00, #008000); /* Green verified background */
+            display: grid;
+            place-items: center;
+            min-height: 100vh;
+            color: white;
+            padding: 20px;
+        }
+        .ticket-container {
+            background: rgba(255, 255, 255, 0.95);
+            color: #333;
+            border-radius: 20px;
+            width: 400px;
+            max-width: 100%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            animation: fadeInDown 0.8s ease-out;
+        }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .header {
+            background: #d90429;
+            color: white;
+            padding: 20px;
+            border-radius: 20px 20px 0 0;
+        }
+        .header h1 {
+            font-family: 'Mountains of Christmas', cursive;
+            font-size: 2.5rem;
+            margin: 0;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+        .content {
+            padding: 30px;
+        }
+        .status-icon {
+            font-size: 80px;
+            color: #008000;
+        }
+        .status-text {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #008000;
+            margin-top: 10px;
+        }
+        .user-details {
+            margin-top: 30px;
+            text-align: left;
+            border-top: 1px dashed #ccc;
+            padding-top: 20px;
+        }
+        .user-details p {
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            color: #555;
+        }
+        .user-details strong {
+            font-weight: 600;
+            color: #000;
+            display: block; /* Label එක උඩින්, value එක යටින් */
+        }
+
+        /* Invalid Ticket Style */
+        .ticket-container.invalid .header {
+            background: #555;
+        }
+        .ticket-container.invalid .status-icon {
+            color: #d90429;
+            font-size: 100px;
+        }
+        .ticket-container.invalid .status-text {
+            color: #d90429;
+        }
+    </style>
+</head>
+<body>
+
+    <? if (isValid) { ?>
+        <div class="ticket-container">
+            <div class="header">
+                <h1>SPERANZA'25</h1>
+            </div>
+            <div class="content">
+                <div class="status-icon">✔</div>
+                <div class="status-text">Verified</div>
+
+                <div class="user-details">
+                    <p><strong>Name:</strong> <?= name ?></p>
+                    <p><strong>Email:</strong> <?= email ?></p>
+                    <p><strong>NIC:</strong> <?= nic ?></p>
+                    <p><strong>Batch:</strong> <?= batch ?></p>
+                </div>
+            </div>
+        </div>
+    <? } else { ?>
+        <div class="ticket-container invalid">
+            <div class="header">
+                <h1>SPERANZA'25</h1>
+            </div>
+            <div class="content">
+                <div class="status-icon">✖</div>
+                <div class="status-text">Invalid Ticket</div>
+
+                <div class="user-details">
+                    <p style="text-align: center; color: #333;">
+                        This QR code is not valid or has not been registered.
+                        <br><br>
+                        Please check your email or contact the organizing committee.
+                    </p>
+                </div>
+            </div>
+        </div>
+    <? } ?>
+
+</body>
+</html>

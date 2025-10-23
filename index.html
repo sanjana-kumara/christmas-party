@@ -10,7 +10,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
     <style>
-        /* (Styles 1-150 - පරණ CSS ටිකමයි, වෙනස් කරලා නෑ) */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Poppins', sans-serif;
@@ -20,7 +19,45 @@
             display: grid;
             place-items: center;
             min-height: 100vh;
-            overflow-x: hidden;
+            overflow: hidden;
+            position: relative;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-100%) translateX(0); }
+            100% { transform: translateY(100vh) translateX(50px); }
+        }
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+        body::before, body::after, .snow-layer {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+        }
+        body::before {
+            background-image: 
+                radial-gradient(circle, white 1px, transparent 1px),
+                radial-gradient(circle, white 1px, transparent 1px);
+            background-size: 100px 100px, 150px 150px;
+            background-position: 0 0, 40px 80px;
+            animation: twinkle 5s infinite;
+        }
+        body::after {
+            background-image: radial-gradient(circle, white 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: fall 10s linear infinite;
+        }
+        .snow-layer {
+            background-image: radial-gradient(circle, white 2px, transparent 2px);
+            background-size: 100px 100px;
+            animation: fall 15s linear infinite;
+            animation-delay: -5s;
         }
         @keyframes gradientBG {
             0% { background-position: 0% 50%; }
@@ -32,13 +69,21 @@
             backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 20px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            box-shadow: 0 8px 32px 0 rgba(0, 80, 0, 0.37);
             width: 420px;
             max-width: 90%;
             padding: 40px;
             color: #fff;
             animation: fadeInDown 0.8s ease-out;
+            position: relative;
+            z-index: 2;
+            max-height: 90vh;
+            overflow-y: auto;
         }
+        .form-container::-webkit-scrollbar { width: 8px; }
+        .form-container::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.1); border-radius: 10px; }
+        .form-container::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.4); border-radius: 10px; }
+        .form-container::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.6); }
         @keyframes fadeInDown {
             from { opacity: 0; transform: translateY(-30px); }
             to { opacity: 1; transform: translateY(0); }
@@ -58,8 +103,15 @@
             font-size: 1.1rem;
         }
         .form-group { margin-bottom: 20px; position: relative; }
-        .form-group label { display: block; margin-bottom: 8px; font-weight: 400; color: #f0f0f0; }
-        .form-group input {
+        .form-group label { 
+            display: block; 
+            margin-bottom: 8px; 
+            font-weight: 400; 
+            color: #f0f0f0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+        }
+        .form-group input,
+        .form-group select {
             width: 100%;
             padding: 14px;
             background: rgba(255, 255, 255, 0.1);
@@ -69,22 +121,38 @@
             font-family: 'Poppins', sans-serif;
             font-size: 1rem;
             transition: all 0.3s ease;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
         }
-        .form-group input:focus {
+        .form-group.select-wrapper { position: relative; }
+        .form-group.select-wrapper::after {
+            content: '▼';
+            font-size: 12px;
+            color: #fff;
+            position: absolute;
+            right: 15px;
+            top: 50px; 
+            pointer-events: none;
+        }
+        .form-group select option {
+            background: #333;
+            color: #fff;
+        }
+        .form-group input:focus,
+        .form-group select:focus {
             outline: none;
             background: rgba(255, 255, 255, 0.2);
             border-color: #fff;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
         }
         .form-group input::placeholder { color: #ddd; }
-
-        /* --- START: අලුතෙන් එකතු කරපු CSS --- */
-        .form-group input.invalid {
-            border-color: #ff4c4c; /* Bright Red */
+        .form-group input.invalid,
+        .form-group select.invalid {
+            border-color: #ff4c4c;
             background: rgba(255, 76, 76, 0.15);
         }
-        /* --- END: අලුතෙන් එකතු කරපු CSS --- */
-
+        .hidden-field { display: none; }
         .btn {
             background: linear-gradient(45deg, #00b300, #008000);
             color: white;
@@ -98,6 +166,10 @@
             font-family: 'Poppins', sans-serif;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             transition: all 0.3s ease;
+            margin-top: 10px;
+            text-decoration: none; 
+            display: inline-block;
+            text-align: center;
         }
         .btn:hover {
             background: linear-gradient(45deg, #00cc00, #009900);
@@ -122,86 +194,144 @@
 </head>
 <body>
 
-    <div class="form-container">
+    <div class="snow-layer"></div>
+
+    <div class="form-container" id="registration-container">
         <h2>Christmas Party 2025</h2>
         <p>Register Now!</p>
 
         <form id="registration-form">
             <div class="form-group">
-                <label for="name">Name (නම):</label>
+                <label for="name">Name :-</label>
                 <input type="text" id="name" name="name" required>
             </div>
+            
             <div class="form-group">
-                <label for="email">Email (ඊමේල්):</label>
+                <label for="email">Email :-</label>
                 <input type="email" id="email" name="email" required>
             </div>
+
             <div class="form-group">
-                <label for="phone">Phone (දුරකථන අංකය):</label>
-                <input type="tel" id="phone" name="phone">
+                <label for="nic">NIC:</label>
+                <input type="text" id="nic" name="nic" placeholder="e.g. 199012345V or 199001201234" required>
+            </div>
+
+            <div class="form-group">
+                <label for="whatsapp">WhatsApp No :-</label>
+                <input type="tel" id="whatsapp" name="whatsapp" placeholder="e.g. 0712345678" required>
+            </div>
+
+            <div class="form-group select-wrapper">
+                <label for="batch">Choose Batch :-</label>
+                <select id="batch" name="batch" required>
+                    <option value="" disabled selected>-- Select your batch --</option>
+                    <option value="Narwal">Narwal</option>
+                    <option value="Moose">Moose</option>
+                    <option value="Ethiina">Ethiina</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group hidden-field" id="other-batch-group">
+                <label for="other-batch">Please specify your batch :-</label>
+                <input type="text" id="other-batch" name="other_batch" placeholder="Enter your batch name">
             </div>
             
-            <button type="submit" class="btn" id="submit-btn">Register</button>
+            <button type="submit" class="btn" id="submit-btn">Get Verification Code</button>
         </form>
-        
-        <div id="loading">Registering, please wait...</div>
-        <div id="message"></div>
     </div>
+    <div class="form-container hidden-field" id="otp-container">
+        <h2>Verify Your Email</h2>
+        <p>Enter the 6-digit code we sent to your email.</p>
+
+        <form id="otp-form">
+            <div class="form-group">
+                <label for="otp-code">Verification Code (OTP):</label>
+                <input type="number" id="otp-code" name="otp" placeholder="123456" required>
+            </div>
+            <button type="submit" class="btn" id="verify-btn">Verify & Register</button>
+        </form>
+    </div>
+    <div class="form-container hidden-field" id="thankyou-container">
+        <h2 style="font-size: 3.5rem;">Thank You! 🎄</h2>
+        
+        <p style="font-size: 1.2rem; line-height: 1.7;">
+            Your registration for <strong>SPERANZA'25</strong> is complete!
+            <br><br>
+            We have sent your official QR Code Invitation to your email. Please check your inbox (and spam folder).
+            <br><br>
+            See you at the party! 🎅
+        </p>
+
+        <!-- <button class="btn" id="register-another-btn">Register Another</button> -->
+    </div>
+    <div id="loading">Registering, please wait...</div>
+    <div id="message"></div>
+
 
     <script>
-        const form = document.getElementById('registration-form');
+        // Form 1 (Registration)
+        const registrationContainer = document.getElementById('registration-container');
+        const regForm = document.getElementById('registration-form');
         const submitButton = document.getElementById('submit-btn');
+
+        // Form 2 (OTP)
+        const otpContainer = document.getElementById('otp-container');
+        const otpForm = document.getElementById('otp-form');
+        const otpInput = document.getElementById('otp-code');
+        const verifyButton = document.getElementById('verify-btn');
+        
+        // Form 3 (Thank You)
+        const thankyouContainer = document.getElementById('thankyou-container');
+        const registerAnotherButton = document.getElementById('register-another-btn');
+
+        // Shared elements
         const messageDiv = document.getElementById('message');
         const loadingDiv = document.getElementById('loading');
         
-        // Validation සඳහා input fields ටික select කරගන්නවා
+        // Form 1 Inputs
+        const nameInput = document.getElementById('name');
         const emailInput = document.getElementById('email');
-        const phoneInput = document.getElementById('phone');
+        const nicInput = document.getElementById('nic'); 
+        const whatsappInput = document.getElementById('whatsapp'); 
+        const batchSelect = document.getElementById('batch'); 
+        const otherBatchGroup = document.getElementById('other-batch-group'); 
+        const otherBatchInput = document.getElementById('other-batch'); 
 
-        // --- Regex Patterns ---
+        // Regex Patterns
         const emailRegex = /^[a-zA-Z0-9._%+-]+@(gmail|yahoo|hotmail|outlook|gov|live)\.(com|lk|edu\.lk|ac\.lk|gov\.lk|sch\.lk|org\.lk|net|in)$/;
-        const phoneRegex = /^0\d{9}$/; // ලංකාවේ 10-digit number (e.g., 0712345678)
+        const phoneRegex = /^(?:0|94|\+94|0094)?(?:(11|21|23|24|25|26|27|31|32|33|34|35|36|37|38|41|45|47|51|52|54|55|57|63|65|66|67|81|91)(0|2|3|4|5|7|9)|7(0|1|2|4|5|6|7|8)\d)\d{6}$/;
+        const nicRegex = /^(\d{9}[vV]|\d{12})$/;
 
-        // ඔයාගෙ Apps Script URL එක
+        // Make sure to replace this with your actual deployed Script URL
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby7Da7rN9Vnf7Seq9QTrh0I3xLmpGj4BCkNGTf5Nb5sIsXlskkywbHg3fzSm5x_HTerfg/exec"; 
 
-        form.addEventListener('submit', function(e) {
-            e.preventDefault(); // Form එක auto-submit වෙන එක නවත්වනවා
+        let pendingFormData = null;
 
-            // පරණ error messages/styles clear කරනවා
-            messageDiv.textContent = '';
-            messageDiv.style.color = "#ff4c4c"; // Default error color
-            emailInput.classList.remove('invalid');
-            phoneInput.classList.remove('invalid');
-
-            // Input fields වලින් values ටික ගන්නවා
-            const email = emailInput.value.trim();
-            const phone = phoneInput.value.trim();
-
-            // --- Validation Logic ---
-
-            // 1. Email Validation
-            if (!emailRegex.test(email)) {
-                messageDiv.textContent = "Please enter a valid email address.";
-                emailInput.classList.add('invalid'); // වැරදි field එක රතු කරනවා
-                emailInput.focus(); // වැරදි field එකට focus කරනවා
-                return; // Function එක මෙතනින් නවත්වනවා
+        // "Other" Batch listener
+        batchSelect.addEventListener('change', function() {
+            if (batchSelect.value === 'Other') {
+                otherBatchGroup.classList.remove('hidden-field');
+                otherBatchInput.required = true; 
+            } else {
+                otherBatchGroup.classList.add('hidden-field');
+                otherBatchInput.required = false; 
+                otherBatchInput.value = ''; 
             }
-            
-            // 2. Phone Validation
-            // Phone field එක 'required' නැති නිසා, data තියෙනවනම් විතරක් check කරනවා
-            if (phone && !phoneRegex.test(phone)) {
-                messageDiv.textContent = "Please enter a valid 10-digit SL phone number (e.g., 0712345678).";
-                phoneInput.classList.add('invalid');
-                phoneInput.focus();
-                return; // Function එක මෙතනින් නවත්වනවා
-            }
-            
-            // --- Validation Pass වුනොත් විතරක් මෙතනට එනවා ---
-            
+        });
+
+        // STEP 1: Handle Registration Form Submit (Send OTP)
+        regForm.addEventListener('submit', function(e) {
+            e.preventDefault(); 
+            if (!validateLocalForm()) return; 
+
             submitButton.disabled = true;
             loadingDiv.style.display = 'block';
+            messageDiv.textContent = 'Sending OTP...';
+            messageDiv.style.color = "#fff";
 
-            const formData = new FormData(form);
+            const formData = new FormData(regForm);
+            pendingFormData = formData; 
 
             fetch(SCRIPT_URL, {
                 method: 'POST',
@@ -210,17 +340,18 @@
             .then(response => response.json())
             .then(data => {
                 if (data.result === "success") {
-                    messageDiv.textContent = "Thank you! You are successfully registered.";
-                    messageDiv.style.color = "#4cff4c"; // Bright Green
-                    form.reset();
+                    registrationContainer.classList.add('hidden-field');
+                    otpContainer.classList.remove('hidden-field');
+                    messageDiv.textContent = data.message;
+                    messageDiv.style.color = "#4cff4c";
+                    otpInput.focus();
                 } else {
-                    // Google script එකෙන් එවන error (e.g., "Already registered")
                     throw new Error(data.message || "Something went wrong!");
                 }
             })
             .catch(error => {
                 messageDiv.textContent = "Error: " + error.message;
-                messageDiv.style.color = "#ff4c4c"; // Bright Red
+                messageDiv.style.color = "#ff4c4c"; 
             })
             .finally(() => {
                 submitButton.disabled = false;
@@ -228,16 +359,129 @@
             });
         });
 
-        // Bonus: User ආයෙ type කරද්දී error style එක අයින් කරනවා
-        emailInput.addEventListener('input', () => {
-            if (emailInput.classList.contains('invalid')) {
-                emailInput.classList.remove('invalid');
-                messageDiv.textContent = '';
+        // STEP 2: Handle OTP Form Submit (Verify & Show Thank You)
+        otpForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const otpValue = otpInput.value.trim();
+            if (otpValue.length !== 6 || !/^\d+$/.test(otpValue)) {
+                messageDiv.textContent = "Please enter a valid 6-digit OTP.";
+                messageDiv.style.color = "#ff4c4c";
+                otpInput.classList.add('invalid');
+                return;
             }
+            
+            verifyButton.disabled = true;
+            loadingDiv.style.display = 'block';
+            messageDiv.textContent = 'Verifying...';
+            messageDiv.style.color = "#fff";
+
+            pendingFormData.append('otp', otpValue);
+
+            fetch(SCRIPT_URL, {
+                method: 'POST',
+                body: pendingFormData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.result === "success") {
+                    otpContainer.classList.add('hidden-field');
+                    thankyouContainer.classList.remove('hidden-field');
+                    messageDiv.textContent = ''; // Clear "Verifying..." message
+                    
+                    regForm.reset();
+                    otpForm.reset();
+                    otherBatchGroup.classList.add('hidden-field');
+                    otherBatchInput.required = false;
+                    pendingFormData = null;
+                } else {
+                    throw new Error(data.message || "Something went wrong!");
+                }
+            })
+            .catch(error => {
+                messageDiv.textContent = "Error: " + error.message;
+                messageDiv.style.color = "#ff4c4c"; 
+            })
+            .finally(() => {
+                verifyButton.disabled = false;
+                loadingDiv.style.display = 'none';
+            });
         });
-        phoneInput.addEventListener('input', () => {
-            if (phoneInput.classList.contains('invalid')) {
-                phoneInput.classList.remove('invalid');
+
+        // Event listener for "Register Another" button
+        registerAnotherButton.addEventListener('click', function() {
+            thankyouContainer.classList.add('hidden-field');
+            registrationContainer.classList.remove('hidden-field');
+            messageDiv.textContent = ''; 
+        });
+
+
+        // Local Validation Helper
+        function validateLocalForm() {
+            messageDiv.textContent = '';
+            nameInput.classList.remove('invalid');
+            emailInput.classList.remove('invalid');
+            nicInput.classList.remove('invalid');
+            whatsappInput.classList.remove('invalid');
+            batchSelect.classList.remove('invalid');
+            otherBatchInput.classList.remove('invalid');
+            otpInput.classList.remove('invalid');
+
+            const name = nameInput.value.trim();
+            const email = emailInput.value.trim();
+            const nic = nicInput.value.trim();
+            const whatsapp = whatsappInput.value.trim();
+            const batch = batchSelect.value;
+            const otherBatch = otherBatchInput.value.trim();
+            
+            if (!name || !email || !nic || !whatsapp || !batch) {
+                messageDiv.textContent = "Please fill in all required fields.";
+                if (!name) nameInput.classList.add('invalid');
+                if (!email) emailInput.classList.add('invalid');
+                if (!nic) nicInput.classList.add('invalid');
+                if (!whatsapp) whatsappInput.classList.add('invalid');
+                if (!batch) batchSelect.classList.add('invalid');
+                return false;
+            }
+            if (!emailRegex.test(email)) {
+                messageDiv.textContent = "Please enter a valid email address.";
+                emailInput.classList.add('invalid'); 
+                emailInput.focus(); 
+                return false;
+            }
+            if (!nicRegex.test(nic)) {
+                messageDiv.textContent = "Please enter a valid SL NIC number (e.g. 123456789V or 123456789012).";
+                nicInput.classList.add('invalid');
+                nicInput.focus();
+                return false;
+            }
+            if (!phoneRegex.test(whatsapp)) {
+                messageDiv.textContent = "Please enter a valid SL phone number (e.g., 0712345678).";
+                whatsappInput.classList.add('invalid');
+                whatsappInput.focus();
+                return false;
+            }
+            if (batch === 'Other' && !otherBatch) {
+                messageDiv.textContent = "Please specify your batch name.";
+                otherBatchInput.classList.add('invalid');
+                otherBatchInput.focus();
+                return false;
+            }
+            return true;
+        }
+
+        // Input listeners to clear errors
+        [nameInput, emailInput, nicInput, whatsappInput, otherBatchInput, otpInput].forEach(input => {
+            input.addEventListener('input', () => {
+                if (input.classList.contains('invalid')) {
+                    input.classList.remove('invalid');
+                    messageDiv.textContent = '';
+                }
+            });
+        });
+        batchSelect.addEventListener('change', () => {
+             if (batchSelect.classList.contains('invalid')) {
+                batchSelect.classList.remove('invalid');
                 messageDiv.textContent = '';
             }
         });
