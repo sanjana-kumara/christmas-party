@@ -10,127 +10,83 @@
     <link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
     <style>
-        /* Modern CSS Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        /* (Styles 1-150 - පරණ CSS ටිකමයි, වෙනස් කරලා නෑ) */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            /* Google Fonts */
             font-family: 'Poppins', sans-serif;
-            
-            /* Animated Gradient Background */
             background: linear-gradient(135deg, #a80000, #004d00, #d90429, #008000);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
-            
-            /* Center Content */
             display: grid;
             place-items: center;
             min-height: 100vh;
-            overflow-x: hidden; /* Hide horizontal scrollbar */
+            overflow-x: hidden;
         }
-
-        /* Background Animation Keyframes */
         @keyframes gradientBG {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
-
         .form-container {
-            /* Glassmorphism Effect */
             background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 20px;
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-            
             width: 420px;
             max-width: 90%;
             padding: 40px;
             color: #fff;
-            
-            /* Page Load Animation */
             animation: fadeInDown 0.8s ease-out;
         }
-
-        /* Load Animation Keyframes */
         @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-
         h2 {
             font-family: 'Mountains of Christmas', cursive;
-            font-size: 3rem; /* 48px */
+            font-size: 3rem;
             text-align: center;
             color: #fff;
             text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
             margin-bottom: 5px;
         }
-
         .form-container p {
             text-align: center;
             font-weight: 300;
             margin-bottom: 30px;
             font-size: 1.1rem;
         }
-
-        .form-group {
-            margin-bottom: 20px;
-            position: relative;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 400;
-            color: #f0f0f0;
-        }
-
+        .form-group { margin-bottom: 20px; position: relative; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 400; color: #f0f0f0; }
         .form-group input {
             width: 100%;
             padding: 14px;
-            
-            /* Modern Input Styling */
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.3);
             border-radius: 10px;
-            
             color: #fff;
             font-family: 'Poppins', sans-serif;
             font-size: 1rem;
-            
-            /* Smooth transition for focus */
             transition: all 0.3s ease;
         }
-
-        /* Remove default blue outline */
         .form-group input:focus {
             outline: none;
             background: rgba(255, 255, 255, 0.2);
             border-color: #fff;
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
         }
+        .form-group input::placeholder { color: #ddd; }
 
-        /* Style for placeholder text (if any) */
-        .form-group input::placeholder {
-            color: #ddd;
+        /* --- START: අලුතෙන් එකතු කරපු CSS --- */
+        .form-group input.invalid {
+            border-color: #ff4c4c; /* Bright Red */
+            background: rgba(255, 76, 76, 0.15);
         }
+        /* --- END: අලුතෙන් එකතු කරපු CSS --- */
 
         .btn {
-            background: linear-gradient(45deg, #00b300, #008000); /* Bright Green Gradient */
+            background: linear-gradient(45deg, #00b300, #008000);
             color: white;
             padding: 15px 20px;
             border: none;
@@ -140,39 +96,22 @@
             font-size: 1.1rem;
             font-weight: 600;
             font-family: 'Poppins', sans-serif;
-            
-            /* Button Shadow & Transition */
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
             transition: all 0.3s ease;
         }
-
-        /* Button Hover & Active Animations */
         .btn:hover {
             background: linear-gradient(45deg, #00cc00, #009900);
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
             transform: translateY(-3px);
         }
-
-        .btn:active {
-            transform: translateY(-1px);
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Button Disabled State */
-        .btn:disabled {
-            background: #555;
-            cursor: not-allowed;
-            opacity: 0.7;
-        }
-        
-        /* Success/Error/Loading Messages */
+        .btn:active { transform: translateY(-1px); box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3); }
+        .btn:disabled { background: #555; cursor: not-allowed; opacity: 0.7; }
         #message {
             text-align: center;
             margin-top: 20px;
             font-weight: 600;
             font-size: 1.1rem;
         }
-        
         #loading {
             text-align: center;
             display: none;
@@ -213,16 +152,54 @@
         const submitButton = document.getElementById('submit-btn');
         const messageDiv = document.getElementById('message');
         const loadingDiv = document.getElementById('loading');
+        
+        // Validation සඳහා input fields ටික select කරගන්නවා
+        const emailInput = document.getElementById('email');
+        const phoneInput = document.getElementById('phone');
+
+        // --- Regex Patterns ---
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        const phoneRegex = /^0\d{9}$/; // ලංකාවේ 10-digit number (e.g., 0712345678)
 
         // ඔයාගෙ Apps Script URL එක
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby7Da7rN9Vnf7Seq9QTrh0I3xLmpGj4BCkNGTf5Nb5sIsXlskkywbHg3fzSm5x_HTerfg/exec"; 
 
         form.addEventListener('submit', function(e) {
-            e.preventDefault(); 
+            e.preventDefault(); // Form එක auto-submit වෙන එක නවත්වනවා
 
+            // පරණ error messages/styles clear කරනවා
+            messageDiv.textContent = '';
+            messageDiv.style.color = "#ff4c4c"; // Default error color
+            emailInput.classList.remove('invalid');
+            phoneInput.classList.remove('invalid');
+
+            // Input fields වලින් values ටික ගන්නවා
+            const email = emailInput.value.trim();
+            const phone = phoneInput.value.trim();
+
+            // --- Validation Logic ---
+
+            // 1. Email Validation
+            if (!emailRegex.test(email)) {
+                messageDiv.textContent = "Please enter a valid email address.";
+                emailInput.classList.add('invalid'); // වැරදි field එක රතු කරනවා
+                emailInput.focus(); // වැරදි field එකට focus කරනවා
+                return; // Function එක මෙතනින් නවත්වනවා
+            }
+            
+            // 2. Phone Validation
+            // Phone field එක 'required' නැති නිසා, data තියෙනවනම් විතරක් check කරනවා
+            if (phone && !phoneRegex.test(phone)) {
+                messageDiv.textContent = "Please enter a valid 10-digit SL phone number (e.g., 0712345678).";
+                phoneInput.classList.add('invalid');
+                phoneInput.focus();
+                return; // Function එක මෙතනින් නවත්වනවා
+            }
+            
+            // --- Validation Pass වුනොත් විතරක් මෙතනට එනවා ---
+            
             submitButton.disabled = true;
             loadingDiv.style.display = 'block';
-            messageDiv.textContent = '';
 
             const formData = new FormData(form);
 
@@ -237,6 +214,7 @@
                     messageDiv.style.color = "#4cff4c"; // Bright Green
                     form.reset();
                 } else {
+                    // Google script එකෙන් එවන error (e.g., "Already registered")
                     throw new Error(data.message || "Something went wrong!");
                 }
             })
@@ -249,6 +227,20 @@
                 loadingDiv.style.display = 'none';
             });
         });
+
+        // Bonus: User ආයෙ type කරද්දී error style එක අයින් කරනවා
+        emailInput.addEventListener('input', () => {
+            if (emailInput.classList.contains('invalid')) {
+                emailInput.classList.remove('invalid');
+                messageDiv.textContent = '';
+            }
+        });
+        phoneInput.addEventListener('input', () => {
+            if (phoneInput.classList.contains('invalid')) {
+                phoneInput.classList.remove('invalid');
+                messageDiv.textContent = '';
+            }
+        });
     </script>
-</body>
+    </body>
 </html>
