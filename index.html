@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Christmas Party Registration</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f0f4f8; display: grid; place-items: center; min-height: 100vh; }
+        .form-container { background: #fff; padding: 30px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); width: 400px; }
+        h2 { text-align: center; color: #d90429; /* Christmas Red */ }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: bold; }
+        .form-group input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; }
+        .btn { background: #008000; /* Christmas Green */ color: white; padding: 12px 20px; border: none; border-radius: 5px; cursor: pointer; width: 100%; font-size: 16px; }
+        .btn:hover { background: #006400; }
+        #message { text-align: center; margin-top: 15px; font-weight: bold; }
+        #loading { text-align: center; display: none; }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>Christmas Party 2025</h2>
+        <p style="text-align:center;">Register Now!</p>
+
+        <form id="registration-form">
+            <div class="form-group">
+                <label for="name">Name (නම):</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email (ඊමේල්):</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone (දුරකථන අංකය):</label>
+                <input type="tel" id="phone" name="phone">
+            </div>
+            
+            <button type="submit" class="btn" id="submit-btn">Register</button>
+        </form>
+        
+        <div id="loading">Registering, please wait...</div>
+        <div id="message"></div>
+    </div>
+
+    <script>
+        const form = document.getElementById('registration-form');
+        const submitButton = document.getElementById('submit-btn');
+        const messageDiv = document.getElementById('message');
+        const loadingDiv = document.getElementById('loading');
+
+        // Apps Script එකෙන් Deploy කලාම ලැබුනු URL එක මෙතන දාන්න
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby7Da7rN9Vnf7Seq9QTrh0I3xLmpGj4BCkNGTf5Nb5sIsXlskkywbHg3fzSm5x_HTerfg/exec"; 
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault(); // Form එක submit වෙන එක නවත්වනවා
+
+            // Button එක disable කරලා, loading message එක පෙන්නනවා
+            submitButton.disabled = true;
+            loadingDiv.style.display = 'block';
+            messageDiv.textContent = '';
+
+            const formData = new FormData(form);
+
+            fetch(SCRIPT_URL, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.result === "success") {
+                    messageDiv.textContent = "Thank you! You are successfully registered.";
+                    messageDiv.style.color = "green";
+                    form.reset(); // Form එක clear කරනවා
+                } else {
+                    throw new Error(data.message || "Something went wrong!");
+                }
+            })
+            .catch(error => {
+                messageDiv.textContent = "Error: " + error.message;
+                messageDiv.style.color = "red";
+            })
+            .finally(() => {
+                // Button එක ආපහු enable කරලා, loading message එක හංගනවා
+                submitButton.disabled = false;
+                loadingDiv.style.display = 'none';
+            });
+        });
+    </SCript>
+</body>
+</html>
