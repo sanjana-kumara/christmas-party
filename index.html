@@ -3,15 +3,159 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Christmas Party Registration</title>
+    <title>Sperenza 2025 Registration</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* --- STYLES FROM style.css (Splash Screen) --- */
+        
+        /* Basic body reset */
         body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+
+        /* 1. Splash Screen Styling */
+        #splash-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: radial-gradient(circle, #b82a31, #a6262c 80%);
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            z-index: 9999;
+            transition: transform 1s cubic-bezier(0.8, 0, 0.2, 1), opacity 1s ease;
+        }
+
+        /* ... (rest of splash screen styles: .splash-content, .glowing-star, h1, h2, animations) ... */
+        .splash-content {
+            z-index: 10;
+            color: white;
+        }
+        .glowing-star {
+            font-size: 2.5rem;
+            color: #ffd700;
+            opacity: 0;
+            animation: pulseGlow 2s infinite ease-in-out;
+            animation-delay: 0.2s;
+            text-shadow: 
+                0 0 10px #ffd700, 
+                0 0 20px #ffd700, 
+                0 0 30px #ffc400;
+        }
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.8; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+        .splash-content h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 5rem;
+            font-weight: normal;
+            margin: 0;
+        }
+        .splash-content h1 span {
+            display: inline-block;
+            opacity: 0;
+            transform: scale(0);
+            text-shadow: 
+                0 0 5px #fff, 
+                0 0 10px #fff, 
+                0 0 20px #ffd700;
+            animation: letterPopIn 0.6s forwards cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .splash-content h1 span.space { width: 1rem; }
+        @keyframes letterPopIn {
+            to { opacity: 1; transform: scale(1); }
+        }
+        .splash-content h1 span:nth-child(1) { animation-delay: 0.5s; }
+        .splash-content h1 span:nth-child(2) { animation-delay: 0.6s; }
+        .splash-content h1 span:nth-child(3) { animation-delay: 0.7s; }
+        .splash-content h1 span:nth-child(4) { animation-delay: 0.8s; }
+        .splash-content h1 span:nth-child(5) { animation-delay: 0.9s; }
+        .splash-content h1 span:nth-child(7) { animation-delay: 1.1s; }
+        .splash-content h1 span:nth-child(8) { animation-delay: 1.2s; }
+        .splash-content h1 span:nth-child(9) { animation-delay: 1.3s; }
+        .splash-content h1 span:nth-child(10) { animation-delay: 1.4s; }
+        .splash-content h1 span:nth-child(11) { animation-delay: 1.5s; }
+        .splash-content h1 span:nth-child(12) { animation-delay: 1.6s; }
+        .splash-content h1 span:nth-child(13) { animation-delay: 1.7s; }
+        .splash-content h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 400;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-top: 1rem;
+            opacity: 0;
+            animation: fadeInUp 1s forwards cubic-bezier(0.2, 0.8, 0.2, 1);
+            animation-delay: 2.0s; 
+        }
+        #splash-screen.hidden {
+            transform: translateY(-100%);
+            opacity: 0;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        #snow-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        .snowflake {
+            position: absolute;
+            top: -10vh;
+            background: white;
+            border-radius: 50%;
+            opacity: 0;
+            animation: fall-splash linear infinite;
+        }
+        @keyframes fall-splash {
+            from { opacity: 0; transform: translateY(0) translateX(0); }
+            10% { opacity: 1; }
+            to { opacity: 1; transform: translateY(110vh) translateX(5vw); }
+        }
+        .snowflake:nth-child(1) { left: 10%; width: 8px; height: 8px; animation-duration: 10s; animation-delay: 0s; }
+        .snowflake:nth-child(2) { left: 20%; width: 4px; height: 4px; animation-duration: 7s; animation-delay: 1s; }
+        .snowflake:nth-child(3) { left: 30%; width: 6px; height: 6px; animation-duration: 9s; animation-delay: 2s; }
+        .snowflake:nth-child(4) { left: 40%; width: 3px; height: 3px; animation-duration: 6s; animation-delay: 0.5s; }
+        .snowflake:nth-child(5) { left: 50%; width: 7px; height: 7px; animation-duration: 11s; animation-delay: 3s; }
+        .snowflake:nth-child(6) { left: 60%; width: 4px; height: 4px; animation-duration: 8s; animation-delay: 1.5s; }
+        .snowflake:nth-child(7) { left: 70%; width: 5px; height: 5px; animation-duration: 12s; animation-delay: 4s; }
+        .snowflake:nth-child(8) { left: 80%; width: 3px; height: 3px; animation-duration: 7s; animation-delay: 2.5s; }
+        .snowflake:nth-child(9) { left: 90%; width: 6px; height: 6px; animation-duration: 9s; animation-delay: 0.2s; }
+        .snowflake:nth-child(10) { left: 5%; width: 8px; height: 8px; animation-duration: 13s; animation-delay: 1s; }
+        .snowflake:nth-child(11) { left: 15%; width: 4px; height: 4px; animation-duration: 7s; animation-delay: 3s; }
+        .snowflake:nth-child(12) { left: 25%; width: 5px; height: 5px; animation-duration: 10s; animation-delay: 5s; }
+        .snowflake:nth-child(13) { left: 35%; width: 3px; height: 3px; animation-duration: 8s; animation-delay: 2s; }
+        .snowflake:nth-child(14) { left: 45%; width: 7px; height: 7px; animation-duration: 11s; animation-delay: 0s; }
+        .snowflake:nth-child(15) { left: 55%; width: 4px; height: 4px; animation-duration: 9s; animation-delay: 1.8s; }
+        .snowflake:nth-child(16) { left: 65%; width: 6px; height: 6px; animation-duration: 12s; animation-delay: 3.5s; }
+        .snowflake:nth-child(17) { left: 75%; width: 3px; height: 3px; animation-duration: 6s; animation-delay: 2.8s; }
+        .snowflake:nth-child(18) { left: 85%; width: 8px; height: 8px; animation-duration: 10s; animation-delay: 4.5s; }
+        .snowflake:nth-child(19) { left: 95%; width: 5px; height: 5px; animation-duration: 8s; animation-delay: 1.2s; }
+        .snowflake:nth-child(20) { left: 12%; width: 4px; height: 4px; animation-duration: 11s; animation-delay: 0.7s; }
+
+
+        /* --- STYLES FROM index.html (Registration Form) --- */
+        
+        #main-content {
             font-family: 'Poppins', sans-serif;
             background: linear-gradient(135deg, #a80000, #004d00, #d90429, #008000);
             background-size: 400% 400%;
@@ -21,7 +165,10 @@
             min-height: 100vh;
             overflow: hidden;
             position: relative;
+            padding: 15px 0;
+            display: none; 
         }
+
         @keyframes fall {
             0% { transform: translateY(-100%) translateX(0); }
             100% { transform: translateY(100vh) translateX(50px); }
@@ -30,7 +177,8 @@
             0%, 100% { opacity: 0.5; }
             50% { opacity: 1; }
         }
-        body::before, body::after, .snow-layer {
+        
+        #main-content::before, #main-content::after, .snow-layer {
             content: '';
             position: absolute;
             top: 0;
@@ -40,7 +188,7 @@
             z-index: 1;
             pointer-events: none;
         }
-        body::before {
+        #main-content::before {
             background-image: 
                 radial-gradient(circle, white 1px, transparent 1px),
                 radial-gradient(circle, white 1px, transparent 1px);
@@ -48,7 +196,7 @@
             background-position: 0 0, 40px 80px;
             animation: twinkle 5s infinite;
         }
-        body::after {
+        #main-content::after {
             background-image: radial-gradient(circle, white 1px, transparent 1px);
             background-size: 50px 50px;
             animation: fall 10s linear infinite;
@@ -70,9 +218,9 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 20px;
             box-shadow: 0 8px 32px 0 rgba(0, 80, 0, 0.37);
-            width: 420px;
-            max-width: 90%;
-            padding: 40px;
+            width: 400px;
+            max-width: 95%;
+            padding: 35px;
             color: #fff;
             animation: fadeInDown 0.8s ease-out;
             position: relative;
@@ -88,7 +236,7 @@
             from { opacity: 0; transform: translateY(-30px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        h2 {
+        .form-container h2 { /* Targeting h2 inside form */
             font-family: 'Mountains of Christmas', cursive;
             font-size: 3rem;
             text-align: center;
@@ -178,98 +326,228 @@
         }
         .btn:active { transform: translateY(-1px); box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3); }
         .btn:disabled { background: #555; cursor: not-allowed; opacity: 0.7; }
+        
+        /* --- MODIFIED CSS FOR #message --- */
         #message {
             text-align: center;
-            margin-top: 20px;
             font-weight: 600;
             font-size: 1.1rem;
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            max-width: 90%;
+            color: #fff; 
+            
+            /* Default hidden state */
+            background: rgba(0,0,0,0); /* Transparent background */
+            padding: 0; /* No padding */
+            border-radius: 10px;
+            opacity: 0;
+            
+            /* Smooth transition */
+            transition: background 0.3s ease, padding 0.3s ease, opacity 0.3s ease;
+            pointer-events: none; /* Prevent clicking on invisible box */
         }
+
+        /* Styles to apply ONLY when #message is NOT empty */
+        #message:not(:empty) {
+            background: rgba(0,0,0,0.5); /* The visible background */
+            padding: 10px 20px; /* The visible padding */
+            opacity: 1;
+            pointer-events: auto; /* Allow interaction when visible */
+        }
+        /* --- END OF MODIFIED CSS --- */
+
         #loading {
             text-align: center;
             display: none;
             margin-top: 20px;
             font-weight: 300;
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            background: rgba(0,0,0,0.5);
+            padding: 10px 20px;
+            border-radius: 10px;
+            color: #fff;
         }
+
+        /* --- MOBILE RESPONSIVE STYLES --- */
+        @media (max-width: 480px) {
+            /* Responsive styles for Splash Screen */
+            .splash-content h1 {
+                font-size: 3.5rem;
+            }
+            .splash-content h2 {
+                font-size: 1rem;
+            }
+            .glowing-star {
+                font-size: 2rem;
+            }
+            
+            /* Responsive styles for Form */
+            .form-container {
+                padding: 25px;
+                max-height: 95vh;
+            }
+            .form-container h2 { 
+                font-size: 2.4rem !important;
+            }
+            .form-container p {
+                font-size: 1rem;
+                margin-bottom: 25px;
+            }
+            .form-group {
+                margin-bottom: 15px;
+            }
+            .form-group input,
+            .form-group select {
+                padding: 12px;
+                font-size: 0.95rem;
+            }
+            .form-group.select-wrapper::after {
+                 top: 48px;
+            }
+            .btn {
+                padding: 14px 20px;
+                font-size: 1rem;
+            }
+            
+            #thankyou-container h2 {
+                font-size: 2.6rem !important; 
+            }
+            #thankyou-container p {
+                font-size: 1rem !important;
+            }
+        }
+        
     </style>
 </head>
 <body>
 
-    <div class="snow-layer"></div>
-
-    <div class="form-container" id="registration-container">
-        <h2>Christmas Party 2025</h2>
-        <p>Register Now!</p>
-
-        <form id="registration-form">
-            <div class="form-group">
-                <label for="name">Name :-</label>
-                <input type="text" id="name" name="name" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="email">Email :-</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-
-            <div class="form-group">
-                <label for="nic">NIC:</label>
-                <input type="text" id="nic" name="nic" placeholder="e.g. 199012345V or 199001201234" required>
-            </div>
-
-            <div class="form-group">
-                <label for="whatsapp">WhatsApp No :-</label>
-                <input type="tel" id="whatsapp" name="whatsapp" placeholder="e.g. 0712345678" required>
-            </div>
-
-            <div class="form-group select-wrapper">
-                <label for="batch">Choose Batch :-</label>
-                <select id="batch" name="batch" required>
-                    <option value="" disabled selected>-- Select your batch --</option>
-                    <option value="Narwal">Narwal</option>
-                    <option value="Moose">Moose</option>
-                    <option value="Ethiina">Ethiina</option>
-                    <option value="Other">Other</option>
-                </select>
-            </div>
-
-            <div class="form-group hidden-field" id="other-batch-group">
-                <label for="other-batch">Please specify your batch :-</label>
-                <input type="text" id="other-batch" name="other_batch" placeholder="Enter your batch name">
-            </div>
-            
-            <button type="submit" class="btn" id="submit-btn">Get Verification Code</button>
-        </form>
+    <div id="splash-screen">
+        <div id="snow-container">
+            <div class="snowflake"></div><div class="snowflake"></div>
+            <div class="snowflake"></div><div class="snowflake"></div>
+            <div class="snowflake"></div><div class="snowflake"></div>
+            <div class="snowflake"></div><div class="snowflake"></div>
+            <div class="snowflake"></div><div class="snowflake"></div>
+            <div class="snowflake"></div><div class="snowflake"></div>
+            <div class="snowflake"></div><div class="snowflake"></div>
+            <div class="snowflake"></div><div class="snowflake"></div>
+            <div class="snowflake"></div><div class="snowflake"></div>
+            <div class="snowflake"></div><div class="snowflake"></div>
+        </div>
+        <div class="splash-content">
+            <div class="glowing-star">★</div>
+            <h1>
+                <span>M</span><span>e</span><span>r</span><span>r</span><span>y</span>
+                <span class="space"> </span>
+                <span>C</span><span>h</span><span>r</span><span>i</span><span>s</span><span>t</span><span>m</span><span>a</span><span>s</span>
+            </h1>
+            <h2>Sperenza 2025</h2>
+        </div>
     </div>
-    <div class="form-container hidden-field" id="otp-container">
-        <h2>Verify Your Email</h2>
-        <p>Enter the 6-digit code we sent to your email.</p>
-
-        <form id="otp-form">
-            <div class="form-group">
-                <label for="otp-code">Verification Code (OTP):</label>
-                <input type="number" id="otp-code" name="otp" placeholder="123456" required>
-            </div>
-            <button type="submit" class="btn" id="verify-btn">Verify & Register</button>
-        </form>
-    </div>
-    <div class="form-container hidden-field" id="thankyou-container">
-        <h2 style="font-size: 3.5rem;">Thank You! 🎄</h2>
+    
+    <main id="main-content">
+    
+        <div class="snow-layer"></div>
         
-        <p style="font-size: 1.2rem; line-height: 1.7;">
-            Your registration for <strong>SPERANZA'25</strong> is complete!
-            <br><br>
-            We have sent your official QR Code Invitation to your email. Please check your inbox (and spam folder).
-            <br><br>
-            See you at the party! 🎅
-        </p>
+        <div id="message"></div> <div class="form-container" id="registration-container">
+            
+            <h2>Christmas Party 2025</h2>
+            <p>Register Now!</p>
 
-        <!-- <button class="btn" id="register-another-btn">Register Another</button> -->
-    </div>
-    <div id="loading">Registering, please wait...</div>
-    <div id="message"></div>
+            <form id="registration-form">
+                <div class="form-group">
+                    <label for="name">Name :-</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email :-</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
 
+                <div class="form-group">
+                    <label for="nic">NIC:</label>
+                    <input type="text" id="nic" name="nic" placeholder="e.g. 199012345V or 199001201234" required>
+                </div>
 
-    <script>
+                <div class="form-group">
+                    <label for="whatsapp">WhatsApp No :-</label>
+                    <input type="tel" id="whatsapp" name="whatsapp" placeholder="e.g. 0712345678" required>
+                </div>
+
+                <div class="form-group select-wrapper">
+                    <label for="batch">Choose Batch :-</label>
+                    <select id="batch" name="batch" required>
+                        <option value="" disabled selected>-- Select your batch --</option>
+                        <option value="Narwal">Narwal</option>
+                        <option value="Moose">Moose</option>
+                        <option value="Ethiina">Ethiina</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group hidden-field" id="other-batch-group">
+                    <label for="other-batch">Please specify your batch :-</label>
+                    <input type="text" id="other-batch" name="other_batch" placeholder="Enter your batch name">
+                </div>
+                
+                <button type="submit" class="btn" id="submit-btn">Get Verification Code</button>
+            </form>
+        </div>
+        <div class="form-container hidden-field" id="otp-container">
+            <h2>Verify Your Email</h2>
+            <p>Enter the 6-digit code we sent to your email.</p>
+
+            <form id="otp-form">
+                <div class="form-group">
+                    <label for="otp-code">Verification Code (OTP):</label>
+                    <input type="number" id="otp-code" name="otp" placeholder="123456" required>
+                </div>
+                <button type="submit" class="btn" id="verify-btn">Verify & Register</button>
+            </form>
+        </div>
+        <div class="form-container hidden-field" id="thankyou-container">
+            <h2 style="font-size: 3.5rem;">Thank You! 🎄</h2>
+            
+            <p style="font-size: 1.2rem; line-height: 1.7;">
+                Your registration for <strong>SPERANZA'25</strong> is complete!
+                <br><br>
+                We have sent your official QR Code Invitation to your email. Please check your inbox (and spam folder).
+                <br><br>
+                See you at the party! 🎅
+            </p>
+        </div>
+        
+        <div id="loading">Registering, please wait...</div>
+    
+    </main> <script>
+        // --- SCRIPT From script.js (Splash Screen) ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const splashScreen = document.getElementById('splash-screen');
+            const mainContent = document.getElementById('main-content');
+            const splashDuration = 8500; // 3.5 seconds
+
+            function hideSplash() {
+                mainContent.style.display = 'grid'; 
+                splashScreen.classList.add('hidden');
+                setTimeout(() => {
+                    splashScreen.remove();
+                }, 1000); 
+            }
+
+            setTimeout(hideSplash, splashDuration);
+        });
+
+        // --- SCRIPT From index.html (Form Logic) ---
+        
         // Form 1 (Registration)
         const registrationContainer = document.getElementById('registration-container');
         const regForm = document.getElementById('registration-form');
@@ -283,7 +561,6 @@
         
         // Form 3 (Thank You)
         const thankyouContainer = document.getElementById('thankyou-container');
-        const registerAnotherButton = document.getElementById('register-another-btn');
 
         // Shared elements
         const messageDiv = document.getElementById('message');
@@ -303,12 +580,10 @@
         const phoneRegex = /^(?:0|94|\+94|0094)?(?:(11|21|23|24|25|26|27|31|32|33|34|35|36|37|38|41|45|47|51|52|54|55|57|63|65|66|67|81|91)(0|2|3|4|5|7|9)|7(0|1|2|4|5|6|7|8)\d)\d{6}$/;
         const nicRegex = /^(\d{9}[vV]|\d{12})$/;
 
-        // Make sure to replace this with your actual deployed Script URL
-        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby7Da7rN9Vnf7Seq9QTrh0I3xLmpGj4BCkNGTf5Nb5sIsXlskkywbHg3fzSm5x_HTerfg/exec"; 
+        const SCRIPT_URL = "httpsUa://script.google.com/macros/s/AKfycby7Da7rN9Vnf7Seq9QTrh0I3xLmpGj4BCkNGTf5Nb5sIsXlskkywbHg3fzSm5x_HTerfg/exec"; 
 
         let pendingFormData = null;
 
-        // "Other" Batch listener
         batchSelect.addEventListener('change', function() {
             if (batchSelect.value === 'Other') {
                 otherBatchGroup.classList.remove('hidden-field');
@@ -320,7 +595,6 @@
             }
         });
 
-        // STEP 1: Handle Registration Form Submit (Send OTP)
         regForm.addEventListener('submit', function(e) {
             e.preventDefault(); 
             if (!validateLocalForm()) return; 
@@ -328,7 +602,7 @@
             submitButton.disabled = true;
             loadingDiv.style.display = 'block';
             messageDiv.textContent = 'Sending OTP...';
-            messageDiv.style.color = "#fff";
+            // messageDiv.style.color = "#fff"; // No longer needed, color is in CSS
 
             const formData = new FormData(regForm);
             pendingFormData = formData; 
@@ -343,7 +617,7 @@
                     registrationContainer.classList.add('hidden-field');
                     otpContainer.classList.remove('hidden-field');
                     messageDiv.textContent = data.message;
-                    messageDiv.style.color = "#4cff4c";
+                    messageDiv.style.color = "#4cff4c"; // Keep success color change
                     otpInput.focus();
                 } else {
                     throw new Error(data.message || "Something went wrong!");
@@ -351,7 +625,7 @@
             })
             .catch(error => {
                 messageDiv.textContent = "Error: " + error.message;
-                messageDiv.style.color = "#ff4c4c"; 
+                messageDiv.style.color = "#ff4c4c"; // Keep error color change
             })
             .finally(() => {
                 submitButton.disabled = false;
@@ -359,7 +633,6 @@
             });
         });
 
-        // STEP 2: Handle OTP Form Submit (Verify & Show Thank You)
         otpForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -374,7 +647,7 @@
             verifyButton.disabled = true;
             loadingDiv.style.display = 'block';
             messageDiv.textContent = 'Verifying...';
-            messageDiv.style.color = "#fff";
+            messageDiv.style.color = "#fff"; // Reset color to default
 
             pendingFormData.append('otp', otpValue);
 
@@ -387,7 +660,7 @@
                 if (data.result === "success") {
                     otpContainer.classList.add('hidden-field');
                     thankyouContainer.classList.remove('hidden-field');
-                    messageDiv.textContent = ''; // Clear "Verifying..." message
+                    messageDiv.textContent = ''; // This will now hide the message box
                     
                     regForm.reset();
                     otpForm.reset();
@@ -408,17 +681,10 @@
             });
         });
 
-        // Event listener for "Register Another" button
-        // registerAnotherButton.addEventListener('click', function() {
-        //     thankyouContainer.classList.add('hidden-field');
-        //     registrationContainer.classList.remove('hidden-field');
-        //     messageDiv.textContent = ''; 
-        // });
-
-
-        // Local Validation Helper
         function validateLocalForm() {
-            messageDiv.textContent = '';
+            messageDiv.textContent = ''; // Clear message (hides box)
+            messageDiv.style.color = "#fff"; // Reset color
+            
             nameInput.classList.remove('invalid');
             emailInput.classList.remove('invalid');
             nicInput.classList.remove('invalid');
@@ -435,7 +701,8 @@
             const otherBatch = otherBatchInput.value.trim();
             
             if (!name || !email || !nic || !whatsapp || !batch) {
-                messageDiv.textContent = "Please fill in all required fields.";
+                messageDiv.textContent = "Please fill in all required fields."; // Shows box
+                messageDiv.style.color = "#ff4c4c";
                 if (!name) nameInput.classList.add('invalid');
                 if (!email) emailInput.classList.add('invalid');
                 if (!nic) nicInput.classList.add('invalid');
@@ -444,25 +711,29 @@
                 return false;
             }
             if (!emailRegex.test(email)) {
-                messageDiv.textContent = "Please enter a valid email address.";
+                messageDiv.textContent = "Please enter a valid email address."; // Shows box
+                messageDiv.style.color = "#ff4c4c";
                 emailInput.classList.add('invalid'); 
                 emailInput.focus(); 
                 return false;
             }
             if (!nicRegex.test(nic)) {
-                messageDiv.textContent = "Please enter a valid SL NIC number (e.g. 123456789V or 123456789012).";
+                messageDiv.textContent = "Please enter a valid SL NIC number (e.g. 123456789V or 123456789012)."; // Shows box
+                messageDiv.style.color = "#ff4c4c";
                 nicInput.classList.add('invalid');
                 nicInput.focus();
                 return false;
             }
             if (!phoneRegex.test(whatsapp)) {
-                messageDiv.textContent = "Please enter a valid SL phone number (e.g., 0712345678).";
+                messageDiv.textContent = "Please enter a valid SL phone number (e.g., 0712345678)."; // Shows box
+                messageDiv.style.color = "#ff4c4c";
                 whatsappInput.classList.add('invalid');
                 whatsappInput.focus();
                 return false;
             }
             if (batch === 'Other' && !otherBatch) {
-                messageDiv.textContent = "Please specify your batch name.";
+                messageDiv.textContent = "Please specify your batch name."; // Shows box
+                messageDiv.style.color = "#ff4c4c";
                 otherBatchInput.classList.add('invalid');
                 otherBatchInput.focus();
                 return false;
@@ -470,21 +741,22 @@
             return true;
         }
 
-        // Input listeners to clear errors
         [nameInput, emailInput, nicInput, whatsappInput, otherBatchInput, otpInput].forEach(input => {
             input.addEventListener('input', () => {
                 if (input.classList.contains('invalid')) {
                     input.classList.remove('invalid');
-                    messageDiv.textContent = '';
+                    messageDiv.textContent = ''; // Hides box
+                    messageDiv.style.color = "#fff"; // Reset color
                 }
             });
         });
         batchSelect.addEventListener('change', () => {
              if (batchSelect.classList.contains('invalid')) {
                 batchSelect.classList.remove('invalid');
-                messageDiv.textContent = '';
+                messageDiv.textContent = ''; // Hides box
+                messageDiv.style.color = "#fff"; // Reset color
             }
         });
     </script>
-    </body>
+</body>
 </html>
