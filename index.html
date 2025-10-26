@@ -5,22 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sperenza 2025 Registration</title>
     <link rel="shortcut icon" href="Speranza.png" type="image/x-icon">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
     <style>
+        /* --- 0. Global Reset --- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
             font-family: 'Montserrat', sans-serif;
             margin: 0;
-            background-color: #f4f4f4; /* Fallback */
-            /* Background gradient will be applied by #main-content */
+            background-color: #f4f4f4; /* Fallback color */
         }
 
-        /* 1. Splash Screen Styling (No Change) */
+        /* --- 1. Splash Screen Styling --- */
         #splash-screen {
             position: fixed;
             top: 0;
@@ -34,20 +35,25 @@
             align-items: center;
             text-align: center;
             z-index: 9999;
+            /* Transition for the hiding animation */
             transition: transform 1s cubic-bezier(0.8, 0, 0.2, 1), opacity 1s ease;
         }
         .splash-content {
-            z-index: 10;
+            z-index: 10; /* Ensures content is above the snow */
             color: white;
         }
+        /* Glowing star animation */
         .glowing-star {
             font-size: 2.5rem; color: #ffd700; opacity: 0; animation: pulseGlow 2s infinite ease-in-out; animation-delay: 0.2s;
             text-shadow: 0 0 10px #ffd700, 0 0 20px #ffd700, 0 0 30px #ffc400;
         }
         @keyframes pulseGlow { 0%, 100% { opacity: 0.8; transform: scale(1); } 50% { opacity: 1; transform: scale(1.1); } }
+        
+        /* Splash screen title */
         .splash-content h1 {
             font-family: 'Great Vibes', cursive; font-size: 5rem; font-weight: normal; margin: 0;
         }
+        /* Individual letter pop-in animation */
         .splash-content h1 span {
             display: inline-block; opacity: 0; transform: scale(0);
             text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #ffd700;
@@ -55,84 +61,109 @@
         }
         .splash-content h1 span.space { width: 1rem; }
         @keyframes letterPopIn { to { opacity: 1; transform: scale(1); } }
-        /* (Letter animation delays - No Change) */
+        /* Animation delays for each letter */
         .splash-content h1 span:nth-child(1) { animation-delay: 0.5s; } .splash-content h1 span:nth-child(2) { animation-delay: 0.6s; } .splash-content h1 span:nth-child(3) { animation-delay: 0.7s; } .splash-content h1 span:nth-child(4) { animation-delay: 0.8s; } .splash-content h1 span:nth-child(5) { animation-delay: 0.9s; } .splash-content h1 span:nth-child(7) { animation-delay: 1.1s; } .splash-content h1 span:nth-child(8) { animation-delay: 1.2s; } .splash-content h1 span:nth-child(9) { animation-delay: 1.3s; } .splash-content h1 span:nth-child(10) { animation-delay: 1.4s; } .splash-content h1 span:nth-child(11) { animation-delay: 1.5s; } .splash-content h1 span:nth-child(12) { animation-delay: 1.6s; } .splash-content h1 span:nth-child(13) { animation-delay: 1.7s; }
+        
+        /* Splash screen subtitle */
         .splash-content h2 {
             font-family: 'Montserrat', sans-serif; font-size: 1.5rem; font-weight: 400; letter-spacing: 4px; text-transform: uppercase; margin-top: 1rem; opacity: 0; animation: fadeInUp 1s forwards cubic-bezier(0.2, 0.8, 0.2, 1); animation-delay: 2.0s;
         }
+        /* Class added by JS to hide the splash screen */
         #splash-screen.hidden {
             transform: translateY(-100%); opacity: 0;
         }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
         
-        /* Snow Container and Snowflakes (No Change) */
+        /* --- 2. Snow Animation Styling --- */
         #snow-container, .snow-layer-main {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1;
         }
         .snowflake {
             position: absolute; top: -10vh; background: white; border-radius: 50%; opacity: 0; animation: fall-splash linear infinite;
         }
+        /* Snowflake falling animation */
         @keyframes fall-splash { from { opacity: 0; transform: translateY(0) translateX(0); } 10% { opacity: 1; } to { opacity: 1; transform: translateY(120vh) translateX(8vw); } }
-        /* (Snowflake nth-child styles - No Change) */
+        /* Individual snowflake settings for random effect */
         .snowflake:nth-child(1) { left: 10%; width: 8px; height: 8px; animation-duration: 10s; animation-delay: 0s; } .snowflake:nth-child(2) { left: 20%; width: 4px; height: 4px; animation-duration: 10s; animation-delay: 1s; } .snowflake:nth-child(3) { left: 30%; width: 6px; height: 6px; animation-duration: 15s; animation-delay: 2s; } .snowflake:nth-child(4) { left: 40%; width: 3px; height: 3px; animation-duration: 6s; animation-delay: 0.5s; } .snowflake:nth-child(5) { left: 50%; width: 7px; height: 7px; animation-duration: 11s; animation-delay: 3s; } .snowflake:nth-child(6) { left: 60%; width: 4px; height: 4px; animation-duration: 8s; animation-delay: 1.5s; } .snowflake:nth-child(7) { left: 70%; width: 5px; height: 5px; animation-duration: 12s; animation-delay: 4s; } .snowflake:nth-child(8) { left: 80%; width: 3px; height: 3px; animation-duration: 7s; animation-delay: 2.5s; } .snowflake:nth-child(9) { left: 90%; width: 6px; height: 6px; animation-duration: 9s; animation-delay: 0.2s; } .snowflake:nth-child(10) { left: 5%; width: 8px; height: 8px; animation-duration: 13s; animation-delay: 1s; } .snowflake:nth-child(11) { left: 15%; width: 4px; height: 4px; animation-duration: 7s; animation-delay: 3s; } .snowflake:nth-child(12) { left: 25%; width: 5px; height: 5px; animation-duration: 10s; animation-delay: 5s; } .snowflake:nth-child(13) { left: 35%; width: 3px; height: 3px; animation-duration: 8s; animation-delay: 2s; } .snowflake:nth-child(14) { left: 45%; width: 7px; height: 7px; animation-duration: 11s; animation-delay: 0s; } .snowflake:nth-child(15) { left: 55%; width: 4px; height: 4px; animation-duration: 9s; animation-delay: 1.8s; } .snowflake:nth-child(16) { left: 65%; width: 6px; height: 6px; animation-duration: 12s; animation-delay: 3.5s; } .snowflake:nth-child(17) { left: 75%; width: 3px; height: 3px; animation-duration: 6s; animation-delay: 2.8s; } .snowflake:nth-child(18) { left: 85%; width: 8px; height: 8px; animation-duration: 10s; animation-delay: 4.5s; } .snowflake:nth-child(19) { left: 95%; width: 5px; height: 5px; animation-duration: 8s; animation-delay: 1.2s; } .snowflake:nth-child(20) { left: 12%; width: 4px; height: 4px; animation-duration: 11s; animation-delay: 0.7s; }
 
-        /* --- STYLES FOR REGISTRATION FORM AREA --- */
+        /* --- 3. Main Content & Form Styling --- */
         
         #main-content {
             font-family: 'Poppins', sans-serif;
             background: linear-gradient(135deg, #a80000, #004d00, #d90429, #008000);
-            background-size: 400% 400%;
+            background-size: 400% 400%; /* For gradient animation */
             animation: gradientBG 15s ease infinite;
-            display: grid; /* Changed back */
+            display: grid;
             place-items: center;
             min-height: 100vh;
-            width: 100%; /* Ensure it takes full width */
-            overflow: hidden;
-            position: relative; /* Needed for absolute positioning of snow */
+            width: 100%;
+            overflow: hidden; /* Hides snow that goes outside */
+            position: relative;
             padding: 15px 0;
-            display: none; /* Initially hidden */
+            display: none; /* Initially hidden until splash screen is gone */
         }
 
-        /* Gradient Animation for Main Content (No Change) */
+        /* Animated gradient background keyframes */
         @keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 
-        /* Form Container Styles (No Change) */
+        /* "Glassmorphism" form container */
         .form-container {
-            background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 20px; box-shadow: 0 8px 32px 0 rgba(0, 80, 0, 0.37); width: 400px; max-width: 95%; padding: 35px; color: #fff; animation: fadeInDown 0.8s ease-out; position: relative; z-index: 2; /* Form on top of snow */ max-height: 90vh; overflow-y: auto;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 rgba(0, 80, 0, 0.37);
+            width: 400px;
+            max-width: 95%;
+            padding: 35px;
+            color: #fff;
+            animation: fadeInDown 0.8s ease-out;
+            position: relative;
+            z-index: 2; /* Form is above the snow layer */
+            max-height: 90vh; /* Max height for mobile */
+            overflow-y: auto; /* Allows scrolling if content is too tall */
+            
+            /* --- SCROLLBAR HIDE STYLES --- */
+            -ms-overflow-style: none;  /* Hides scrollbar for IE and Edge */
+            scrollbar-width: none;  /* Hides scrollbar for Firefox */
         }
-        /* Scrollbar (No Change) */
-        .form-container::-webkit-scrollbar { width: 8px; } .form-container::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.1); border-radius: 10px; } .form-container::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.4); border-radius: 10px; } .form-container::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.6); } 
-        /* Form Fade In (No Change) */
+        
+        /* Hides scrollbar for Chrome, Safari, Opera */
+        .form-container::-webkit-scrollbar { 
+            display: none; 
+        } 
+        
+        /* Form container fade-in animation */
         @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
-        /* Form Elements (No Change) */
+        
+        /* Form elements styling */
         .form-container h2 { font-family: 'Mountains of Christmas', cursive; font-size: 3rem; text-align: center; color: #fff; text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5); margin-bottom: 5px; } 
         .form-container p { text-align: center; font-weight: 300; margin-bottom: 30px; font-size: 1.1rem; } 
-        .form-group { margin-bottom: 20px; position: relative; } /* position: relative is important! */
+        .form-group { margin-bottom: 20px; position: relative; } /* Needed for suggestion box */
         .form-group label { display: block; margin-bottom: 8px; font-weight: 400; color: #f0f0f0; text-shadow: 1px 1px 2px rgba(0,0,0,0.4); } 
         .form-group input, .form-group select { width: 100%; padding: 14px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 10px; color: #fff; font-family: 'Poppins', sans-serif; font-size: 1rem; transition: all 0.3s ease; -webkit-appearance: none; -moz-appearance: none; appearance: none; } 
-        
-        /* === REMOVED SELECT STYLES === */
-        /* .form-group.select-wrapper { position: relative; } */
-        /* .form-group.select-wrapper::after { content: '▼'; ... } */
-        /* .form-group select option { background: #333; color: #fff; } */
-        
+                
         .form-group input:focus, .form-group select:focus { outline: none; background: rgba(255, 255, 255, 0.2); border-color: #fff; box-shadow: 0 0 15px rgba(255, 255, 255, 0.6); } 
         .form-group input::placeholder { color: #ddd; } 
+        /* Validation error style for inputs */
         .form-group input.invalid, .form-group select.invalid { border-color: #ff4c4c; background: rgba(255, 76, 76, 0.15); } 
-        .hidden-field { display: none !important; } /* Use important for switching visibility */
+        /* Utility class to hide/show form sections */
+        .hidden-field { display: none !important; }
+        
+        /* Button styling */
         .btn { background: linear-gradient(45deg, #00b300, #008000); color: white; padding: 15px 20px; border: none; border-radius: 10px; cursor: pointer; width: 100%; font-size: 1.1rem; font-weight: 600; font-family: 'Poppins', sans-serif; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); transition: all 0.3s ease; margin-top: 10px; text-decoration: none; display: inline-block; text-align: center; } 
         .btn:hover { background: linear-gradient(45deg, #00cc00, #009900); box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); transform: translateY(-3px); } 
         .btn:active { transform: translateY(-1px); box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3); } 
         .btn:disabled { background: #555; cursor: not-allowed; opacity: 0.7; } 
         
-        /* === NEW STYLES FOR BATCH SUGGESTIONS === */
+        /* --- 4. Batch Suggestion Box Styling --- */
         #batch-suggestions {
             display: none; /* Hidden by default */
             position: absolute;
-            top: 100%; /* Position right below the input */
+            top: 100%; /* Positioned right below the input */
             left: 0;
             right: 0;
-            background: rgba(40, 40, 40, 0.95); /* Dark, slightly transparent bg */
+            background: rgba(40, 40, 40, 0.95);
             backdrop-filter: blur(5px);
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-top: none;
@@ -140,7 +171,15 @@
             z-index: 10;
             max-height: 150px;
             overflow-y: auto;
+
+            /* --- SCROLLBAR HIDE STYLES (for suggestion box too) --- */
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
         }
+        #batch-suggestions::-webkit-scrollbar { 
+            display: none; /* Chrome, Safari, Opera */
+        }
+        /* Individual suggestion item */
         .suggestion-item {
             padding: 12px 15px;
             color: #fff;
@@ -151,57 +190,66 @@
         .suggestion-item:hover {
             background: rgba(255, 255, 255, 0.2);
         }
-        /* Scrollbar for suggestions */
-        #batch-suggestions::-webkit-scrollbar { width: 6px; }
-        #batch-suggestions::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.1); }
-        #batch-suggestions::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.4); border-radius: 6px; }
+        
+        /* --- 5. Message & Loading Indicators --- */
+        #message { 
+            text-align: center; font-weight: 600; font-size: 1.1rem; position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 100; max-width: 90%; color: #fff; background: rgba(0,0,0,0); padding: 0; border-radius: 10px; opacity: 0; transition: background 0.3s ease, padding 0.3s ease, opacity 0.3s ease; pointer-events: none; 
+        } 
+        /* Style for when message is not empty */
+        #message:not(:empty) { 
+            background: rgba(0,0,0,0.5); padding: 10px 20px; opacity: 1; pointer-events: auto; 
+        } 
+        #loading { 
+            text-align: center; display: none; margin-top: 20px; font-weight: 300; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 100; background: rgba(0,0,0,0.5); padding: 10px 20px; border-radius: 10px; color: #fff; 
+        }
 
-        /* Message & Loading Styles (No Change) */
-        #message { text-align: center; font-weight: 600; font-size: 1.1rem; position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 100; max-width: 90%; color: #fff; background: rgba(0,0,0,0); padding: 0; border-radius: 10px; opacity: 0; transition: background 0.3s ease, padding 0.3s ease, opacity 0.3s ease; pointer-events: none; } 
-        #message:not(:empty) { background: rgba(0,0,0,0.5); padding: 10px 20px; opacity: 1; pointer-events: auto; } 
-        #loading { text-align: center; display: none; margin-top: 20px; font-weight: 300; position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 100; background: rgba(0,0,0,0.5); padding: 10px 20px; border-radius: 10px; color: #fff; }
-
-        /* Mobile Responsive Styles (No Change) */
+        /* --- 6. Mobile Responsive Styles --- */
         @media (max-width: 480px) {
             .splash-content h1 { font-size: 3.5rem; } .splash-content h2 { font-size: 1rem; } .glowing-star { font-size: 2rem; }
             .form-container { padding: 25px; max-height: 95vh; width: 95%; } 
             .form-container h2 { font-size: 2.4rem !important; } 
             .form-container p { font-size: 1rem; margin-bottom: 25px; } 
             .form-group { margin-bottom: 15px; } 
-            .form-group input, .form-group select { padding: 12px; font-size: 0.95rem; } 
-            
-            /* .form-group.select-wrapper::after { top: 48px; }  -- REMOVED */
-            
+            .form-group input, .form-group select { padding: 12px; font-size: 0.95rem; }             
             .btn { padding: 14px 20px; font-size: 1rem; } 
             #thankyou-container h2 { font-size: 2.6rem !important; } 
             #thankyou-container p { font-size: 1rem !important; }
         }
+
+        /* --- 7. Typing Animation (Footer) --- */
+        .typing-effect {
+            color: white;
+            font-size: smaller;
+            font-family: monospace; 
+            overflow: hidden; 
+            white-space: nowrap; 
+            border-right: .1em solid white; /* The cursor */
+            width: 0; 
+            /* Run 'typing' animation forwards/backwards infinitely */
+            /* Run 'blink' animation infinitely */
+            animation: 
+                typing 4s steps(34) infinite alternate,
+                blink .75s step-end infinite;
+        }
+        /* Keyframes for typing out and pausing */
+        @keyframes typing {
+            0% { width: 0; } /* Start hidden */
+            80% { width: 34ch; } /* Type out to 34 characters */
+            100% { width: 34ch; } /* Pause at full width */
+        }
+        /* Keyframes for the blinking cursor */
+        @keyframes blink {
+            from, to { border-color: transparent; } /* Cursor hidden */
+            50% { border-color: white; } /* Cursor visible */
+        }
+
     </style>
 </head>
 <body>
 
     <div id="splash-screen">
         <div id="snow-container"> 
-            <div class="snowflake"></div>
-            <div class="snowflake"></div> 
-            <div class="snowflake"></div>
-            <div class="snowflake"></div> 
-            <div class="snowflake"></div>
-            <div class="snowflake"></div> 
-            <div class="snowflake"></div>
-            <div class="snowflake"></div> 
-            <div class="snowflake"></div>
-            <div class="snowflake"></div> 
-            <div class="snowflake"></div>
-            <div class="snowflake"></div> 
-            <div class="snowflake"></div>
-            <div class="snowflake"></div> 
-            <div class="snowflake"></div>
-            <div class="snowflake"></div> 
-            <div class="snowflake"></div>
-            <div class="snowflake"></div> 
-            <div class="snowflake"></div>
-            <div class="snowflake"></div>
+            <div class="snowflake"></div> <div class="snowflake"></div> <div class="snowflake"></div> <div class="snowflake"></div> <div class="snowflake"></div> <div class="snowflake"></div> <div class="snowflake"></div> <div class="snowflake"></div> <div class="snowflake"></div> <div class="snowflake"></div> <div class="snowflake"></div> <div class="snowflake"></div> <div class="snowflake"></div> <div class="snowflake"></div> <div class="snowflake"></div> <div class="snowflake"></div> <div class="snowflake"></div> <div class="snowflake"></div> <div class="snowflake"></div> <div class="snowflake"></div>
         </div>
         <div class="splash-content">
             <div class="glowing-star">★</div>
@@ -218,7 +266,7 @@
             <div class="snowflake"></div><div class="snowflake"></div> 
             <div class="snowflake"></div><div class="snowflake"></div> 
             <div class="snowflake"></div><div class="snowflake"></div>
-        </div>
+            </div>
 
         <div id="message"></div> 
         
@@ -227,23 +275,23 @@
                 <form id="registration-form"> 
                     <div class="form-group"> 
                         <label for="name">Name :-</label> 
-                        <input type="text" id="name" name="name" required> 
+                        <input type="text" id="name" name="name" placeholder="Enter your name" required> 
                     </div> 
                     <div class="form-group"> 
                         <label for="email">Email :-</label> 
-                        <input type="email" id="email" name="email" required> 
+                        <input type="email" id="email" name="email" placeholder="Enter email address" required> 
                     </div> 
                     <div class="form-group"> 
                         <label for="nic">NIC:</label> 
-                        <input type="text" id="nic" name="nic" placeholder="e.g. 199012345V or 199001201234" required> 
+                        <input type="text" id="nic" name="nic" placeholder="Enter your nic" required> 
                     </div> 
                     <div class="form-group"> 
                         <label for="whatsapp">WhatsApp No :-</label> 
-                        <input type="tel" id="whatsapp" name="whatsapp" placeholder="e.g. 0712345678" required> 
+                        <input type="tel" id="whatsapp" name="whatsapp" placeholder="Enter your number" required> 
                     </div> 
                     
                     <div class="form-group"> <label for="batch-input">Batch :-</label> 
-                        <input type="text" id="batch-input" name="batch" placeholder="Type your batch name..." required autocomplete="off">
+                        <input type="text" id="batch-input" name="batch" placeholder="Type your batch name" required autocomplete="off">
                         <div id="batch-suggestions"></div> </div> 
                     
                     <button type="submit" class="btn" id="submit-btn">Get Verification Code</button> 
@@ -253,46 +301,55 @@
         <div class="form-container hidden-field" id="otp-container">
                 <h2>Verify Your Email</h2> <p>Enter the 6-digit code we sent to your email.</p> <form id="otp-form"> <div class="form-group"> <label for="otp-code">Verification Code (OTP):</label> <input type="number" id="otp-code" name="otp" placeholder="123456" required> </div> <button type="submit" class="btn" id="verify-btn">Verify & Register</button> </form>
         </div>
+        
         <div class="form-container hidden-field" id="thankyou-container">
                 <h2 style="font-size: 3.5rem;">Thank You! 🎄</h2> <p style="font-size: 1.2rem; line-height: 1.7;"> Your registration for <strong>SPERANZA'25</strong> is complete! <br><br> We have sent your official QR Code Invitation to your email. Please check your inbox (and spam folder). <br><br> See you at the party! 🎅 </p>
         </div>
         
         <div id="loading">Registering, please wait...</div>
+
+        <div class="typing-effect">Develop By :- SK Software Solution</div>
     
     </main> 
 
     <script>
-        // --- Splash Screen Logic (No Change) ---
+        // --- 1. Splash Screen Logic ---
         document.addEventListener('DOMContentLoaded', () => {
             const splashScreen = document.getElementById('splash-screen');
             const mainContent = document.getElementById('main-content');
-            const splashDuration = 4000; // 4 seconds
+            // Total time splash screen is visible (in milliseconds)
+            const splashDuration = 8500; // 8.5 seconds
 
             function hideSplash() {
+                // Add 'hidden' class to trigger CSS transition
                 splashScreen.classList.add('hidden'); 
+                // Make the main content visible (but still off-screen)
                 mainContent.style.display = 'grid';
                 
+                // After splash screen slide-up animation (1s)
                 setTimeout(() => {
-                    splashScreen.remove();
+                    splashScreen.remove(); // Remove splash screen from DOM
                     
+                    // Small delay to ensure 'display: grid' is rendered
                     setTimeout(() => {
                         const registrationContainer = document.getElementById('registration-container');
                         if (registrationContainer) {
+                            // Trigger the fade-in animation for the form
                             registrationContainer.style.opacity = '1'; 
                             registrationContainer.style.transition = 'opacity 0.8s ease-in';
                         }
                     }, 50); 
 
-                }, 1000); // Match CSS transition duration
+                }, 1000); // Must match CSS transition duration
             }
-            // --- Splash screen duration fix ---
-            setTimeout(hideSplash, 8500); // Using your 8.5s duration
+            // Set the main timer to hide the splash screen
+            setTimeout(hideSplash, splashDuration);
         });
 
 
-        // --- Form Logic (MODIFIED) ---
+        // --- 2. Form Logic ---
         
-        // (Form Selectors - MODIFIED)
+        // --- Get all necessary DOM elements ---
         const registrationContainer = document.getElementById('registration-container'); 
         const regForm = document.getElementById('registration-form'); 
         const submitButton = document.getElementById('submit-btn'); 
@@ -307,20 +364,19 @@
         const emailInput = document.getElementById('email'); 
         const nicInput = document.getElementById('nic'); 
         const whatsappInput = document.getElementById('whatsapp'); 
+        const batchInput = document.getElementById('batch-input'); 
+        const suggestionsContainer = document.getElementById('batch-suggestions'); 
         
-        // --- NEW/MODIFIED SELECTORS ---
-        const batchInput = document.getElementById('batch-input'); // New Batch Input
-        const suggestionsContainer = document.getElementById('batch-suggestions'); // New Suggestions Box
-        
-        // (Regex, SCRIPT_URL - No Change)
+        // --- Regex for validation ---
         const emailRegex = /^[a-zA-Z0-9._%+-]+@(gmail|yahoo|hotmail|outlook|gov|live)\.(com|lk|edu\.lk|ac\.lk|gov\.lk|sch\.lk|org\.lk|net|in)$/; 
         const phoneRegex = /^(?:0|94|\+94|0094)?(?:(11|21|23|24|25|26|27|31|32|33|34|35|36|37|38|41|45|47|51|52|54|55|57|63|65|66|67|81|91)(0|2|3|4|5|7|9)|7(0|1|2|4|5|6|7|8)\d)\d{6}$/; 
         const nicRegex = /^(\d{9}[vV]|\d{12})$/;
-        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwFH3mUAIRAfoxg0Xcd8VG-oi-wCXepBDCibJgcOc1N65yMegcGKAjwG3UKvYccGflXGg/exec"; // Replace if you redeployed!
-        let pendingFormData = null;
+        
+        // --- Google Apps Script Web App URL ---
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwFH3mUAIRAfoxg0Xcd8VG-oi-wCXepBDCibJgcOc1N65yMegcGKAjwG3UKvYccGflXGg/exec"; // IMPORTANT: Replace if you redeploy!
+        let pendingFormData = null; // Stores form data between OTP request and verification
 
-        // --- NEW: Batch Suggestions List ---
-        //  batch names
+        // --- List of batches for suggestions ---
         const batchSuggestionsList = [
             'Narwal', 
             'Moose', 
@@ -332,17 +388,19 @@
             'Gazelle'
         ];
 
-        // Show Message Function (No Change)
+        // --- Helper function to show messages to the user ---
         function showMessage(text, color = "#fff") { 
             messageDiv.textContent = text; 
             messageDiv.style.color = color; 
+            // Set background color based on message type (error, success, info)
             if (color === "#ff4c4c") { messageDiv.style.background = "rgba(200,0,0,0.8)"; } 
             else if (color === "#4cff4c") { messageDiv.style.background = "rgba(0,100,0,0.8)"; } 
             else { messageDiv.style.background = "rgba(0,0,0,0.5)"; } 
+            // Clear message after 4 seconds
             setTimeout(() => { messageDiv.textContent = ''; }, 4000); 
         }
 
-        // --- NEW: Batch Suggestion Logic (No Change) ---
+        // --- Batch suggestion box logic ---
         batchInput.addEventListener('input', () => {
             const query = batchInput.value.trim().toLowerCase();
             suggestionsContainer.innerHTML = ''; // Clear old suggestions
@@ -351,18 +409,21 @@
                 suggestionsContainer.style.display = 'none';
                 return;
             }
-
+            
+            // Filter the list based on user input
             const filteredBatches = batchSuggestionsList.filter(batch => 
                 batch.toLowerCase().includes(query)
             );
 
+            // Create and display suggestion items
             if (filteredBatches.length > 0) {
                 filteredBatches.forEach(batch => {
                     const item = document.createElement('div');
                     item.classList.add('suggestion-item');
                     item.textContent = batch;
+                    // Add click listener to fill input when suggestion is clicked
                     item.addEventListener('click', () => {
-                        batchInput.value = batch; // Fill input with clicked suggestion
+                        batchInput.value = batch; 
                         suggestionsContainer.innerHTML = '';
                         suggestionsContainer.style.display = 'none';
                     });
@@ -374,48 +435,103 @@
             }
         });
 
-        // --- NEW: Hide suggestions when clicking outside (No Change) ---
+        // --- Hide suggestion box if user clicks outside of it ---
         document.addEventListener('click', (e) => {
             if (!batchInput.contains(e.target) && !suggestionsContainer.contains(e.target)) {
                 suggestionsContainer.style.display = 'none';
             }
         });
-
         
-        // Step 1: Send OTP (No Change)
-        regForm.addEventListener('submit', function(e) { e.preventDefault(); if (!validateLocalForm()) return; submitButton.disabled = true; loadingDiv.style.display = 'block'; const formData = new FormData(regForm); pendingFormData = formData; fetch(SCRIPT_URL, { method: 'POST', body: formData }).then(response => response.json()).then(data => { if (data.result === "success") { registrationContainer.classList.add('hidden-field'); otpContainer.classList.remove('hidden-field'); showMessage(data.message, "#4cff4c"); otpInput.focus(); } else { throw new Error(data.message || "Something went wrong!"); } }).catch(error => { showMessage("Error: " + error.message, "#ff4c4c"); }).finally(() => { submitButton.disabled = false; loadingDiv.style.display = 'none'; }); });
+        // --- STEP 1: Handle Registration Form Submit (Send OTP) ---
+        regForm.addEventListener('submit', function(e) { 
+            e.preventDefault(); // Stop default form submission
+            if (!validateLocalForm()) return; // Run validation first
+            
+            submitButton.disabled = true; 
+            loadingDiv.style.display = 'block';
+            
+            const formData = new FormData(regForm);
+            pendingFormData = formData; // Save data for step 2
+            
+            // Send data to Google Apps Script
+            fetch(SCRIPT_URL, { method: 'POST', body: formData })
+                .then(response => response.json())
+                .then(data => { 
+                    if (data.result === "success") { 
+                        // Hide registration form, show OTP form
+                        registrationContainer.classList.add('hidden-field'); 
+                        otpContainer.classList.remove('hidden-field'); 
+                        showMessage(data.message, "#4cff4c"); // Show success message
+                        otpInput.focus(); 
+                    } else { 
+                        throw new Error(data.message || "Something went wrong!"); 
+                    } 
+                })
+                .catch(error => { 
+                    showMessage("Error: " + error.message, "#ff4c4c"); 
+                })
+                .finally(() => { 
+                    // Re-enable button and hide loading
+                    submitButton.disabled = false; 
+                    loadingDiv.style.display = 'none'; 
+                }); 
+        });
         
-        // Step 2: Verify OTP (No Change)
+        // --- STEP 2: Handle OTP Form Submit (Verify & Register) ---
         otpForm.addEventListener('submit', function(e) { 
             e.preventDefault(); 
             const otpValue = otpInput.value.trim(); 
-            if (otpValue.length !== 6 || !/^\d+$/.test(otpValue)) { showMessage("Please enter a valid 6-digit OTP.", "#ff4c4c"); otpInput.classList.add('invalid'); return; } 
+            
+            // Basic OTP validation
+            if (otpValue.length !== 6 || !/^\d+$/.test(otpValue)) { 
+                showMessage("Please enter a valid 6-digit OTP.", "#ff4c4c"); 
+                otpInput.classList.add('invalid'); 
+                return; 
+            } 
+            
             verifyButton.disabled = true; 
             loadingDiv.style.display = 'block'; 
-            if (!pendingFormData) { showMessage("Error: Registration data lost. Please refresh and try again.", "#ff4c4c"); verifyButton.disabled = false; loadingDiv.style.display = 'none'; return; } 
-            pendingFormData.append('otp', otpValue); 
-            fetch(SCRIPT_URL, { method: 'POST', body: pendingFormData }).then(response => response.json()).then(data => { 
-                if (data.result === "success") { 
-                    otpContainer.classList.add('hidden-field'); 
-                    thankyouContainer.classList.remove('hidden-field'); 
-                    messageDiv.textContent = ''; 
-                    regForm.reset(); 
-                    otpForm.reset(); 
-                    pendingFormData = null; 
-                } else { 
-                    throw new Error(data.message || "Something went wrong!"); 
-                } 
-            }).catch(error => { 
-                showMessage("Error: " + error.message, "#ff4c4c"); 
-                if(pendingFormData) { pendingFormData.delete('otp'); } 
-            }).finally(() => { 
+            
+            if (!pendingFormData) { 
+                showMessage("Error: Registration data lost. Please refresh and try again.", "#ff4c4c"); 
                 verifyButton.disabled = false; 
                 loadingDiv.style.display = 'none'; 
-            }); 
+                return; 
+            } 
+            
+            // Add the OTP to the saved form data
+            pendingFormData.append('otp', otpValue); 
+            
+            // Send all data (including OTP) to Google Apps Script
+            fetch(SCRIPT_URL, { method: 'POST', body: pendingFormData })
+                .then(response => response.json())
+                .then(data => { 
+                    if (data.result === "success") { 
+                        // Success! Hide OTP form, show Thank You message
+                        otpContainer.classList.add('hidden-field'); 
+                        thankyouContainer.classList.remove('hidden-field'); 
+                        messageDiv.textContent = ''; 
+                        regForm.reset(); // Clear original form
+                        otpForm.reset(); // Clear OTP form
+                        pendingFormData = null; // Clear stored data
+                    } else { 
+                        throw new Error(data.message || "Something went wrong!"); 
+                    } 
+                })
+                .catch(error => { 
+                    showMessage("Error: " + error.message, "#ff4c4c"); 
+                    // If failed, remove the 'otp' parameter so user can retry
+                    if(pendingFormData) { pendingFormData.delete('otp'); } 
+                })
+                .finally(() => { 
+                    verifyButton.disabled = false; 
+                    loadingDiv.style.display = 'none'; 
+                }); 
         });
         
-        // --- Local Validation Helper (MODIFIED) ---
+        // --- Client-side validation function ---
         function validateLocalForm() { 
+            // Clear all previous error styles
             messageDiv.textContent = ''; 
             messageDiv.style.color = "#fff"; 
             nameInput.classList.remove('invalid'); 
@@ -425,14 +541,17 @@
             batchInput.classList.remove('invalid'); 
             otpInput.classList.remove('invalid'); 
             
+            // Get trimmed values
             const name = nameInput.value.trim(); 
             const email = emailInput.value.trim(); 
             const nic = nicInput.value.trim(); 
             const whatsapp = whatsappInput.value.trim(); 
             const batch = batchInput.value.trim(); 
 
+            // 1. Check for empty fields
             if (!name || !email || !nic || !whatsapp || !batch) { 
                 showMessage("Please fill in all required fields.", "#ff4c4c"); 
+                // Add 'invalid' class to empty fields
                 if (!name) nameInput.classList.add('invalid'); 
                 if (!email) emailInput.classList.add('invalid'); 
                 if (!nic) nicInput.classList.add('invalid'); 
@@ -440,18 +559,21 @@
                 if (!batch) batchInput.classList.add('invalid');
                 return false; 
             } 
+            // 2. Check email format
             if (!emailRegex.test(email)) { 
                 showMessage("Please enter a valid email address.", "#ff4c4c"); 
                 emailInput.classList.add('invalid'); 
                 emailInput.focus(); 
                 return false; 
             } 
+            // 3. Check NIC format
             if (!nicRegex.test(nic)) { 
                 showMessage("Please enter a valid SL NIC number (e.g. 123456789V or 123456789012).", "#ff4c4c"); 
                 nicInput.classList.add('invalid'); 
                 nicInput.focus(); 
                 return false; 
             } 
+            // 4. Check phone format
             if (!phoneRegex.test(whatsapp)) { 
                 showMessage("Please enter a valid SL phone number (e.g., 0712345678).", "#ff4c4c"); 
                 whatsappInput.classList.add('invalid'); 
@@ -459,32 +581,29 @@
                 return false; 
             } 
             
-            // --- NEW: BATCH SUGGESTION VALIDATION ---
-            // User input lowercase (e.g., "narwal")
+            // 5. Check if batch is in the official list (case-insensitive)
             const batchLower = batch.toLowerCase();
-            
-            // List suggestion and input  (case-insensitive) match 
             const isBatchValid = batchSuggestionsList.some(suggestion => suggestion.toLowerCase() === batchLower);
 
             if (!isBatchValid) {
-                // Match  error
-                showMessage("Please enter or select a valid batch ", "#ff4c4c");
+                // If the typed batch is not in the list
+                showMessage("Please enter or select a valid batch from the suggestions.", "#ff4c4c");
                 batchInput.classList.add('invalid');
                 batchInput.focus();
                 return false;
             }
-            // --- END OF NEW LOGIC ---
 
+            // All validations passed
             return true; 
         }
-        // --- END OF MODIFIED FUNCTION ---
         
-        // Input Listeners to Clear Errors (MODIFIED)
-        [nameInput, emailInput, nicInput, whatsappInput, batchInput, otpInput].forEach(input => { // MODIFIED ARRAY
+        // --- Add event listeners to clear errors on input ---
+        [nameInput, emailInput, nicInput, whatsappInput, batchInput, otpInput].forEach(input => { 
             input.addEventListener('input', () => { 
+                // If user starts typing in an invalid field, remove the error
                 if (input.classList.contains('invalid')) { 
                     input.classList.remove('invalid'); 
-                    messageDiv.textContent = ''; 
+                    messageDiv.textContent = ''; // Clear the error message
                     messageDiv.style.color = "#fff"; 
                 } 
             }); 
