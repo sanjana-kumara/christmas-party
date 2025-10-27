@@ -247,9 +247,7 @@
             -ms-overflow-style: none;  /* Hides scrollbar for IE and Edge */
             scrollbar-width: none;  /* Hides scrollbar for Firefox */
 
-            /* --- NEW: For 3D Tilt Effect --- */
-            transition: transform 0.1s ease-out;
-            transform-style: preserve-3d;
+            /* --- REMOVED 3D TILT STYLES --- */
         }
         
         /* Hides scrollbar for Chrome, Safari, Opera */
@@ -261,9 +259,9 @@
         @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
         
         /* Form elements styling */
-        .form-container h2 { font-family: 'Mountains of Christmas', cursive; font-size: 3rem; text-align: center; color: #fff; text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5); margin-bottom: 5px; transform: translateZ(20px); /* Makes text pop in 3D */ } 
-        .form-container p { text-align: center; font-weight: 300; margin-bottom: 30px; font-size: 1.1rem; transform: translateZ(10px); } 
-        .form-group { margin-bottom: 20px; position: relative; transform: translateZ(10px); } /* Needed for suggestion box */
+        .form-container h2 { font-family: 'Mountains of Christmas', cursive; font-size: 3rem; text-align: center; color: #fff; text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5); margin-bottom: 5px; } 
+        .form-container p { text-align: center; font-weight: 300; margin-bottom: 30px; font-size: 1.1rem; } 
+        .form-group { margin-bottom: 20px; position: relative; } /* Needed for suggestion box */
         .form-group label { display: block; margin-bottom: 8px; font-weight: 400; color: #f0f0f0; text-shadow: 1px 1px 2px rgba(0,0,0,0.4); } 
         .form-group input, .form-group select { width: 100%; padding: 14px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 10px; color: #fff; font-family: 'Poppins', sans-serif; font-size: 1rem; transition: all 0.3s ease; -webkit-appearance: none; -moz-appearance: none; appearance: none; } 
                 
@@ -275,9 +273,9 @@
         .hidden-field { display: none !important; }
         
         /* Button styling */
-        .btn { background: linear-gradient(45deg, #00b300, #008000); color: white; padding: 15px 20px; border: none; border-radius: 10px; cursor: none; /* Use custom cursor */ width: 100%; font-size: 1.1rem; font-weight: 600; font-family: 'Poppins', sans-serif; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); transition: all 0.3s ease; margin-top: 10px; text-decoration: none; display: inline-block; text-align: center; transform: translateZ(15px); } 
-        .btn:hover { background: linear-gradient(45deg, #00cc00, #009900); box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); transform: translateY(-3px) translateZ(15px); } 
-        .btn:active { transform: translateY(-1px) translateZ(15px); box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3); } 
+        .btn { background: linear-gradient(45deg, #00b300, #008000); color: white; padding: 15px 20px; border: none; border-radius: 10px; cursor: none; /* Use custom cursor */ width: 100%; font-size: 1.1rem; font-weight: 600; font-family: 'Poppins', sans-serif; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); transition: all 0.3s ease; margin-top: 10px; text-decoration: none; display: inline-block; text-align: center; } 
+        .btn:hover { background: linear-gradient(45deg, #00cc00, #009900); box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); transform: translateY(-3px); } 
+        .btn:active { transform: translateY(-1px); box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3); } 
         .btn:disabled { background: #555; cursor: not-allowed; opacity: 0.7; } 
         
         /* --- 4. Batch Suggestion Box Styling --- */
@@ -761,7 +759,7 @@
         // --- 3. (NEW) Custom Cursor, Sparkle, & 3D Tilt Logic ---
         
         const customCursor = document.getElementById('custom-cursor');
-        const formsToTilt = [registrationContainer, otpContainer, thankyouContainer];
+        // const formsToTilt = [registrationContainer, otpContainer, thankyouContainer]; // <-- REMOVED
         let canCreateSparkle = true;
         
         // Update cursor position, sparkle trail, and 3D tilt
@@ -799,25 +797,7 @@
                 }, 50);
             }
 
-            // 3. 3D Parallax Tilt Effect for visible forms
-            formsToTilt.forEach(form => {
-                if (!form.classList.contains('hidden-field')) {
-                    const rect = form.getBoundingClientRect();
-                    const maxTilt = 10; // Max tilt in degrees
-
-                    // Calculate cursor position relative to the center of the form
-                    const x = clientX - rect.left - rect.width / 2;
-                    const y = clientY - rect.top - rect.height / 2;
-
-                    // Calculate tilt angles
-                    // Invert 'y' for natural up/down tilt
-                    const tiltX = (y / (rect.height / 2)) * -maxTilt; 
-                    const tiltY = (x / (rect.width / 2)) * maxTilt;
-
-                    // Apply the 3D transform
-                    form.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale(1.02)`;
-                }
-            });
+            // --- 3D TILT LOGIC REMOVED ---
         });
 
         // Add 'clicked' class to cursor on mousedown
@@ -830,12 +810,7 @@
             customCursor.classList.remove('clicked');
         });
 
-        // Reset 3D tilt when mouse leaves a form
-        formsToTilt.forEach(form => {
-            form.addEventListener('mouseleave', () => {
-                form.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
-            });
-        });
+        // --- 3D TILT MOUSELEAVE LOGIC REMOVED ---
         
     </script>
 </body>
