@@ -19,6 +19,10 @@
             font-family: 'Montserrat', sans-serif;
             margin: 0;
             background-color: #f4f4f4; /* Fallback color */
+            /* Cursors sparkles will be appended to the body, hide overflow */
+            overflow: hidden;
+            /* HIDE THE DEFAULT SYSTEM CURSOR */
+            cursor: none; 
         }
 
         /* --- 1. Splash Screen Styling --- */
@@ -35,25 +39,21 @@
             align-items: center;
             text-align: center;
             z-index: 9999;
-            /* Transition for the hiding animation */
-            transition: transform 1s cubic-bezier(0.8, 0, 0.2, 1), opacity 1s ease;
+            transition: transform 1s cubic-bezier(0.8, 0.0, 0.2, 1), opacity 1s ease;
         }
         .splash-content {
             z-index: 10; /* Ensures content is above the snow */
             color: white;
         }
-        /* Glowing star animation */
         .glowing-star {
             font-size: 2.5rem; color: #ffd700; opacity: 0; animation: pulseGlow 2s infinite ease-in-out; animation-delay: 0.2s;
             text-shadow: 0 0 10px #ffd700, 0 0 20px #ffd700, 0 0 30px #ffc400;
         }
         @keyframes pulseGlow { 0%, 100% { opacity: 0.8; transform: scale(1); } 50% { opacity: 1; transform: scale(1.1); } }
         
-        /* Splash screen title */
         .splash-content h1 {
             font-family: 'Great Vibes', cursive; font-size: 5rem; font-weight: normal; margin: 0;
         }
-        /* Individual letter pop-in animation */
         .splash-content h1 span {
             display: inline-block; opacity: 0; transform: scale(0);
             text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #ffd700;
@@ -61,14 +61,11 @@
         }
         .splash-content h1 span.space { width: 1rem; }
         @keyframes letterPopIn { to { opacity: 1; transform: scale(1); } }
-        /* Animation delays for each letter */
         .splash-content h1 span:nth-child(1) { animation-delay: 0.5s; } .splash-content h1 span:nth-child(2) { animation-delay: 0.6s; } .splash-content h1 span:nth-child(3) { animation-delay: 0.7s; } .splash-content h1 span:nth-child(4) { animation-delay: 0.8s; } .splash-content h1 span:nth-child(5) { animation-delay: 0.9s; } .splash-content h1 span:nth-child(7) { animation-delay: 1.1s; } .splash-content h1 span:nth-child(8) { animation-delay: 1.2s; } .splash-content h1 span:nth-child(9) { animation-delay: 1.3s; } .splash-content h1 span:nth-child(10) { animation-delay: 1.4s; } .splash-content h1 span:nth-child(11) { animation-delay: 1.5s; } .splash-content h1 span:nth-child(12) { animation-delay: 1.6s; } .splash-content h1 span:nth-child(13) { animation-delay: 1.7s; }
         
-        /* Splash screen subtitle */
         .splash-content h2 {
             font-family: 'Montserrat', sans-serif; font-size: 1.5rem; font-weight: 400; letter-spacing: 4px; text-transform: uppercase; margin-top: 1rem; opacity: 0; animation: fadeInUp 1s forwards cubic-bezier(0.2, 0.8, 0.2, 1); animation-delay: 2.0s;
         }
-        /* Class added by JS to hide the splash screen */
         #splash-screen.hidden {
             transform: translateY(-100%); opacity: 0;
         }
@@ -81,10 +78,133 @@
         .snowflake {
             position: absolute; top: -10vh; background: white; border-radius: 50%; opacity: 0; animation: fall-splash linear infinite;
         }
-        /* Snowflake falling animation */
         @keyframes fall-splash { from { opacity: 0; transform: translateY(0) translateX(0); } 10% { opacity: 1; } to { opacity: 1; transform: translateY(120vh) translateX(8vw); } }
-        /* Individual snowflake settings for random effect */
         .snowflake:nth-child(1) { left: 10%; width: 8px; height: 8px; animation-duration: 10s; animation-delay: 0s; } .snowflake:nth-child(2) { left: 20%; width: 4px; height: 4px; animation-duration: 10s; animation-delay: 1s; } .snowflake:nth-child(3) { left: 30%; width: 6px; height: 6px; animation-duration: 15s; animation-delay: 2s; } .snowflake:nth-child(4) { left: 40%; width: 3px; height: 3px; animation-duration: 6s; animation-delay: 0.5s; } .snowflake:nth-child(5) { left: 50%; width: 7px; height: 7px; animation-duration: 11s; animation-delay: 3s; } .snowflake:nth-child(6) { left: 60%; width: 4px; height: 4px; animation-duration: 8s; animation-delay: 1.5s; } .snowflake:nth-child(7) { left: 70%; width: 5px; height: 5px; animation-duration: 12s; animation-delay: 4s; } .snowflake:nth-child(8) { left: 80%; width: 3px; height: 3px; animation-duration: 7s; animation-delay: 2.5s; } .snowflake:nth-child(9) { left: 90%; width: 6px; height: 6px; animation-duration: 9s; animation-delay: 0.2s; } .snowflake:nth-child(10) { left: 5%; width: 8px; height: 8px; animation-duration: 13s; animation-delay: 1s; } .snowflake:nth-child(11) { left: 15%; width: 4px; height: 4px; animation-duration: 7s; animation-delay: 3s; } .snowflake:nth-child(12) { left: 25%; width: 5px; height: 5px; animation-duration: 10s; animation-delay: 5s; } .snowflake:nth-child(13) { left: 35%; width: 3px; height: 3px; animation-duration: 8s; animation-delay: 2s; } .snowflake:nth-child(14) { left: 45%; width: 7px; height: 7px; animation-duration: 11s; animation-delay: 0s; } .snowflake:nth-child(15) { left: 55%; width: 4px; height: 4px; animation-duration: 9s; animation-delay: 1.8s; } .snowflake:nth-child(16) { left: 65%; width: 6px; height: 6px; animation-duration: 12s; animation-delay: 3.5s; } .snowflake:nth-child(17) { left: 75%; width: 3px; height: 3px; animation-duration: 6s; animation-delay: 2.8s; } .snowflake:nth-child(18) { left: 85%; width: 8px; height: 8px; animation-duration: 10s; animation-delay: 4.5s; } .snowflake:nth-child(19) { left: 95%; width: 5px; height: 5px; animation-duration: 8s; animation-delay: 1.2s; } .snowflake:nth-child(20) { left: 12%; width: 4px; height: 4px; animation-duration: 11s; animation-delay: 0.7s; }
+
+        
+        /* --- 2.5 (MODIFIED) Floating Snowflakes --- */
+        .orb-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0; /* Behind snow (1) and form (2) */
+            pointer-events: none;
+        }
+        .orb {
+            position: absolute;
+            bottom: -150px; /* Start below the screen */
+            color: white;
+            animation: floatUp 20s linear infinite;
+        }
+        /* Use a pseudo-element for the snowflake character */
+        .orb::before {
+            content: '❄'; /* Snowflake character */
+            position: absolute;
+            left: 0;
+            top: 0;
+            
+            /* The golden glow shadow you liked, applied as text-shadow */
+            text-shadow: 0 0 8px rgba(255, 215, 0, 0.4), 
+                         0 0 20px rgba(255, 215, 0, 0.5),
+                         0 0 35px rgba(255, 215, 0, 0.3);
+        }
+
+        @keyframes floatUp {
+            from {
+                transform: translateY(0) scale(1) translateX(0);
+                opacity: 0.7;
+            }
+            to {
+                /* Float up and slightly drift horizontally */
+                transform: translateY(-120vh) scale(0.5) translateX(5vw);
+                opacity: 0;
+            }
+        }
+        
+        /* Different font-sizes, positions, and speeds */
+        .orb:nth-child(1) { font-size: 80px; left: 10%; animation-duration: 25s; animation-delay: 0s; }
+        .orb:nth-child(2) { font-size: 40px; left: 30%; animation-duration: 20s; animation-delay: 5s; }
+        .orb:nth-child(3) { font-size: 120px; left: 50%; animation-duration: 30s; animation-delay: 2s; }
+        .orb:nth-child(4) { font-size: 60px; left: 75%; animation-duration: 18s; animation-delay: 8s; }
+        .orb:nth-child(5) { font-size: 90px; left: 90%; animation-duration: 22s; animation-delay: 12s; }
+        .orb:nth-child(6) { font-size: 50px; left: -5%; animation-duration: 28s; animation-delay: 15s; }
+        /* --- END OF MODIFIED CSS --- */
+
+        /* --- 2.6 (NEW) Custom Cursor & Sparkle Effect --- */
+        #custom-cursor {
+            position: fixed;
+            width: 30px; /* Slightly larger for the snowflake */
+            height: 30px;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 10000;
+            transition: transform 0.2s ease; /* Updated transition */
+        }
+        
+        /* NEW: SVG styling for the snowflake */
+        #custom-cursor svg {
+            width: 100%;
+            height: 100%;
+            color: rgba(255, 215, 0, 0.9); /* Gold color */
+            
+            /* The golden glow */
+            filter: drop-shadow(0 0 2px rgba(255, 215, 0, 0.7)) 
+                    drop-shadow(0 0 5px rgba(255, 215, 0, 0.5));
+            
+            /* NEW: Gentle rotation animation */
+            animation: cursor-spin 20s linear infinite;
+            transition: all 0.2s ease;
+        }
+
+        /* NEW: Keyframes for the cursor rotation */
+        @keyframes cursor-spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Click animation - now scales down */
+        #custom-cursor.clicked {
+            transform: translate(-50%, -50%) scale(0.8);
+        }
+        #custom-cursor.clicked svg {
+            /* Make it glow brighter on click */
+            filter: drop-shadow(0 0 3px rgba(255, 255, 255, 1)) 
+                    drop-shadow(0 0 8px rgba(255, 215, 0, 1));
+        }
+
+        .sparkle {
+            position: fixed; /* Use fixed to follow viewport cursor */
+            width: 8px;
+            height: 8px;
+            background: #fff;
+            border-radius: 50%;
+            pointer-events: none; /* Crucial so it doesn't block clicks */
+            z-index: 9998; /* Above main content, below splash */
+            
+            /* White/Gold glow */
+            box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #ffd700;
+            
+            /* Animation to fade and shrink */
+            animation: sparkle-fade 0.6s forwards ease-out;
+            
+            /* JS will set top/left. Need to center on cursor. */
+            transform: translate(-50%, -50%); 
+        }
+
+        @keyframes sparkle-fade {
+            from {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1.2);
+            }
+            to {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0);
+            }
+        }
+        /* --- END OF NEW CSS --- */
 
         /* --- 3. Main Content & Form Styling --- */
         
@@ -104,7 +224,7 @@
         }
 
         /* Animated gradient background keyframes */
-        @keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        @keyframes gradientBG { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
 
         /* "Glassmorphism" form container */
         .form-container {
@@ -119,13 +239,17 @@
             color: #fff;
             animation: fadeInDown 0.8s ease-out;
             position: relative;
-            z-index: 2; /* Form is above the snow layer */
+            z-index: 2; /* Form is above the snow layer (1) and orbs (0) */
             max-height: 90vh; /* Max height for mobile */
             overflow-y: auto; /* Allows scrolling if content is too tall */
             
             /* --- SCROLLBAR HIDE STYLES --- */
             -ms-overflow-style: none;  /* Hides scrollbar for IE and Edge */
             scrollbar-width: none;  /* Hides scrollbar for Firefox */
+
+            /* --- NEW: For 3D Tilt Effect --- */
+            transition: transform 0.1s ease-out;
+            transform-style: preserve-3d;
         }
         
         /* Hides scrollbar for Chrome, Safari, Opera */
@@ -137,9 +261,9 @@
         @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
         
         /* Form elements styling */
-        .form-container h2 { font-family: 'Mountains of Christmas', cursive; font-size: 3rem; text-align: center; color: #fff; text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5); margin-bottom: 5px; } 
-        .form-container p { text-align: center; font-weight: 300; margin-bottom: 30px; font-size: 1.1rem; } 
-        .form-group { margin-bottom: 20px; position: relative; } /* Needed for suggestion box */
+        .form-container h2 { font-family: 'Mountains of Christmas', cursive; font-size: 3rem; text-align: center; color: #fff; text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5); margin-bottom: 5px; transform: translateZ(20px); /* Makes text pop in 3D */ } 
+        .form-container p { text-align: center; font-weight: 300; margin-bottom: 30px; font-size: 1.1rem; transform: translateZ(10px); } 
+        .form-group { margin-bottom: 20px; position: relative; transform: translateZ(10px); } /* Needed for suggestion box */
         .form-group label { display: block; margin-bottom: 8px; font-weight: 400; color: #f0f0f0; text-shadow: 1px 1px 2px rgba(0,0,0,0.4); } 
         .form-group input, .form-group select { width: 100%; padding: 14px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 10px; color: #fff; font-family: 'Poppins', sans-serif; font-size: 1rem; transition: all 0.3s ease; -webkit-appearance: none; -moz-appearance: none; appearance: none; } 
                 
@@ -151,9 +275,9 @@
         .hidden-field { display: none !important; }
         
         /* Button styling */
-        .btn { background: linear-gradient(45deg, #00b300, #008000); color: white; padding: 15px 20px; border: none; border-radius: 10px; cursor: pointer; width: 100%; font-size: 1.1rem; font-weight: 600; font-family: 'Poppins', sans-serif; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); transition: all 0.3s ease; margin-top: 10px; text-decoration: none; display: inline-block; text-align: center; } 
-        .btn:hover { background: linear-gradient(45deg, #00cc00, #009900); box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); transform: translateY(-3px); } 
-        .btn:active { transform: translateY(-1px); box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3); } 
+        .btn { background: linear-gradient(45deg, #00b300, #008000); color: white; padding: 15px 20px; border: none; border-radius: 10px; cursor: none; /* Use custom cursor */ width: 100%; font-size: 1.1rem; font-weight: 600; font-family: 'Poppins', sans-serif; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); transition: all 0.3s ease; margin-top: 10px; text-decoration: none; display: inline-block; text-align: center; transform: translateZ(15px); } 
+        .btn:hover { background: linear-gradient(45deg, #00cc00, #009900); box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3); transform: translateY(-3px) translateZ(15px); } 
+        .btn:active { transform: translateY(-1px) translateZ(15px); box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3); } 
         .btn:disabled { background: #555; cursor: not-allowed; opacity: 0.7; } 
         
         /* --- 4. Batch Suggestion Box Styling --- */
@@ -183,7 +307,7 @@
         .suggestion-item {
             padding: 12px 15px;
             color: #fff;
-            cursor: pointer;
+            cursor: none; /* Use custom cursor */
             transition: background 0.2s ease;
             font-size: 0.95rem;
         }
@@ -205,6 +329,17 @@
 
         /* --- 6. Mobile Responsive Styles --- */
         @media (max-width: 480px) {
+            /* Hide custom cursor effects on mobile, they don't apply */
+            #custom-cursor, .sparkle {
+                display: none;
+            }
+            body {
+                cursor: auto; /* Show default cursor */
+            }
+            .btn, .suggestion-item {
+                cursor: pointer; /* Show pointer on touch */
+            }
+
             .splash-content h1 { font-size: 3.5rem; } .splash-content h2 { font-size: 1rem; } .glowing-star { font-size: 2rem; }
             .form-container { padding: 25px; max-height: 95vh; width: 95%; } 
             .form-container h2 { font-size: 2.4rem !important; } 
@@ -247,6 +382,12 @@
 </head>
 <body>
 
+    <!-- Custom cursor element with SVG inside --><div id="custom-cursor">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2v20"></path><path d="M12 12l-8.66-5"></path><path d="M12 12l8.66-5"></path><path d="M12 12l-8.66 5"></path><path d="M12 12l8.66 5"></path><path d="M5.2 6.8l-3.03 1.75"></path><path d="M18.8 6.8l3.03 1.75"></path><path d="M5.2 17.2l-3.03-1.75"></path><path d="M18.8 17.2l3.03-1.75"></path>
+        </svg>
+    </div>
+
     <div id="splash-screen">
         <div id="snow-container"> 
             <div class="snowflake"></div> <div class="snowflake"></div> <div class="snowflake"></div> <div class="snowflake"></div> <div class="snowflake"></div> <div class="snowflake"></div> <div class="snowflake"></div> <div class="snowflake"></div> <div class="snowflake"></div> <div class="snowflake"></div> <div class="snowflake"></div> <div class="snowflake"></div> <div class="snowflake"></div> <div class="snowflake"></div> <div class="snowflake"></div> <div class="snowflake"></div> <div class="snowflake"></div> <div class="snowflake"></div> <div class="snowflake"></div> <div class="snowflake"></div>
@@ -261,8 +402,16 @@
     </div>
     
     <main id="main-content">
-    
-        <div class="snow-layer-main" id="snow-container-main"> 
+
+        <!-- ▼▼▼ FLOATING SNOWFLAKES HTML (formerly Orbs) ▼▼▼ --><div class="orb-container">
+            <div class="orb"></div>
+            <div class="orb"></div>
+            <div class="orb"></div>
+            <div class="orb"></div>
+            <div class="orb"></div>
+            <div class="orb"></div>
+        </div>
+        <!-- ▲▲▲ END OF HTML ▲▲▲ --><div class="snow-layer-main" id="snow-container-main"> 
             <div class="snowflake"></div><div class="snowflake"></div> 
             <div class="snowflake"></div><div class="snowflake"></div> 
             <div class="snowflake"></div><div class="snowflake"></div>
@@ -607,8 +756,88 @@
                     messageDiv.style.color = "#fff"; 
                 } 
             }); 
-        }); 
+        });
+
+        // --- 3. (NEW) Custom Cursor, Sparkle, & 3D Tilt Logic ---
+        
+        const customCursor = document.getElementById('custom-cursor');
+        const formsToTilt = [registrationContainer, otpContainer, thankyouContainer];
+        let canCreateSparkle = true;
+        
+        // Update cursor position, sparkle trail, and 3D tilt
+        window.addEventListener('mousemove', (e) => {
+            const { clientX, clientY } = e;
+            
+            // 1. Update Custom Cursor Position
+            // Use requestAnimationFrame for smoother cursor following
+            window.requestAnimationFrame(() => {
+                customCursor.style.left = clientX + 'px';
+                customCursor.style.top = clientY + 'px';
+            });
+
+            // 2. Create Sparkle Trail (Throttled)
+            if (canCreateSparkle) {
+                canCreateSparkle = false;
+                
+                const sparkle = document.createElement('div');
+                sparkle.className = 'sparkle';
+                
+                // Position the sparkle at the cursor's location
+                sparkle.style.left = clientX + 'px';
+                sparkle.style.top = clientY + 'px';
+                
+                document.body.appendChild(sparkle);
+                
+                // Clean up the DOM after the animation (600ms)
+                setTimeout(() => {
+                    sparkle.remove();
+                }, 600); // Must match animation-duration in CSS
+
+                // Reset the flag after a short delay (50ms)
+                setTimeout(() => {
+                    canCreateSparkle = true;
+                }, 50);
+            }
+
+            // 3. 3D Parallax Tilt Effect for visible forms
+            formsToTilt.forEach(form => {
+                if (!form.classList.contains('hidden-field')) {
+                    const rect = form.getBoundingClientRect();
+                    const maxTilt = 10; // Max tilt in degrees
+
+                    // Calculate cursor position relative to the center of the form
+                    const x = clientX - rect.left - rect.width / 2;
+                    const y = clientY - rect.top - rect.height / 2;
+
+                    // Calculate tilt angles
+                    // Invert 'y' for natural up/down tilt
+                    const tiltX = (y / (rect.height / 2)) * -maxTilt; 
+                    const tiltY = (x / (rect.width / 2)) * maxTilt;
+
+                    // Apply the 3D transform
+                    form.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale(1.02)`;
+                }
+            });
+        });
+
+        // Add 'clicked' class to cursor on mousedown
+        window.addEventListener('mousedown', () => {
+            customCursor.classList.add('clicked');
+        });
+
+        // Remove 'clicked' class on mouseup
+        window.addEventListener('mouseup', () => {
+            customCursor.classList.remove('clicked');
+        });
+
+        // Reset 3D tilt when mouse leaves a form
+        formsToTilt.forEach(form => {
+            form.addEventListener('mouseleave', () => {
+                form.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+            });
+        });
         
     </script>
 </body>
 </html>
+
